@@ -8,4 +8,17 @@
     padding: 20px;
     margin: 10px;
     cursor: pointer;
+
+}
+
+.agua {
+    background-color: blue;
+}
+
+.tocado {
+    background-color: red;
+}
+
+.hundido {
+    background-color: black;
 }
