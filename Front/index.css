@@ -1,0 +1,24 @@
+.tabla {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.casilla {
+    background-color: aqua;
+    padding: 20px;
+    margin: 10px;
+    cursor: pointer;
+
+}
+
+.agua {
+    background-color: blue;
+}
+
+.tocado {
+    background-color: red;
+}
+
+.hundido {
+    background-color: black;
+}
