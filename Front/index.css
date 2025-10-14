@@ -1,9 +1,8 @@
 body{
     display: flex;
 }
-.tabla {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+#tabla {
+    background-color: blue;
     width: 100px;
 }
 
