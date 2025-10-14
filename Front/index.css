@@ -1,6 +1,10 @@
+body{
+    display: flex;
+}
 .tabla {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
+    width: 100px;
 }
 
 .casilla {
@@ -21,4 +25,18 @@
 
 .hundido {
     background-color: black;
+}
+.bloc1{
+    background-color: blueviolet;
+}
+.bloc2{
+    background-color: rgb(81, 255, 0);
+    width: 32%;
+    
+}
+.bloc3{
+    margin-left: 300px;
+    background-color: aqua;
+    width: 300px;
+    display: flex;
 }
