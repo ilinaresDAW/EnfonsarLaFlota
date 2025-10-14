@@ -10,18 +10,15 @@ def read_root():
     return {"mensaje": "Hundir la flota!"}
 
 @app.get("/createGame/{game_id}/{dimension}/{nom}")
+def crear_juego():
+    return
+
 
 @app.get("/shot/{game_id}/{cordsDisparo}")
+def crear_disparo():
+    return
 
 @app.get("/game/{game_id}/")
+def juego():
+    return
 
-
-
-# Para añadir al compa
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500"],  
-    allow_credentials=True,
-    allow_methods=["*"],  
-    allow_headers=["*"],  
-)
