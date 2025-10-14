@@ -1,14 +1,21 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-import random as rd
 
 # Crear la aplicación
-app = FastAPI()
+app = FastAPI(tittle="Hundir la flota", version="1.0.0")
 
 # Ruta raíz
 @app.get("/")
 def read_root():
-    return {"mensaje": "Hola alumnos!"}
+    return {"mensaje": "Hundir la flota!"}
+
+@app.get("/createGame/{game_id}/{dimension}/{nom}")
+
+@app.get("/shot/{game_id}/{cordsDisparo}")
+
+@app.get("/game/{game_id}/")
+
+
 
 # Para añadir al compa
 app.add_middleware(
@@ -18,15 +25,3 @@ app.add_middleware(
     allow_methods=["*"],  
     allow_headers=["*"],  
 )
-
-def crear_matriz(filas, columnas):
-    matriz = []
-    for i in range(filas):
-        fila = []
-        for j in range(columnas):
-            fila.append(-1)
-        matriz.append(fila)
-    return matriz
-
-for i in crear_matriz(7,7):
-    print(i)
