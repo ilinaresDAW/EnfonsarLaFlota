@@ -9,12 +9,15 @@ app = FastAPI(tittle="Hundir la flota", version="1.0.0")
 def read_root():
     return {"mensaje": "Hundir la flota!"}
 
-@app.get("/createGame/{game_id}/{dimension}/{nom}")
+@app.get("/createGame/{game_id}/{PoX}/{PoY}/{nom}")
 def crear_juego():
     return
 
+@app.get("/createShip//{game_id}/{Size}")
+def crear_barco():
+    return
 
-@app.get("/shot/{game_id}/{cordsDisparo}")
+@app.get("/shot/{game_id}/{PoX}/{PoY}")
 def crear_disparo():
     return
 

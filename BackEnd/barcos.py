@@ -30,7 +30,31 @@ class barcos:
     def __init__(self, tamaño, cords):
         self.tamaño = tamaño
         self.cords = []
-
+    
+    def comprobar_direccion(PoX, PoY, tamaño):
+        listaTemp = []
+        if PoX + (tamaño -1) <= (taulell.Filas - 1):
+            listaTemp.append(PoX + (tamaño -1))
+            if PoX - (tamaño -1) >= 0 :
+                listaTemp.append(PoX - (tamaño -1))
+                if PoY + (tamaño -1) <= (taulell.Columnas - 1):
+                    listaTemp.append(PoY + (tamaño -1))
+                    if PoY - (tamaño -1) >= 0:
+                        listaTemp.append(PoY - (tamaño -1))
+        elif PoX - (tamaño -1) >= 0 :
+            listaTemp.append(PoX - (tamaño -1))
+            if PoY + (tamaño -1) <= (taulell.Columnas - 1):
+                listaTemp.append(PoY + (tamaño -1))
+                if PoY - (tamaño -1) >= 0:
+                    listaTemp.append(PoY - (tamaño -1))
+        elif PoY + (tamaño -1) <= (taulell.Columnas - 1):
+            listaTemp.append(PoY + (tamaño -1))
+            if PoY - (tamaño -1) >= 0:
+                listaTemp.append(PoY - (tamaño -1))
+        elif PoY - (tamaño -1) >= 0:
+            listaTemp.append(PoY - (tamaño -1))
+        return listaTemp
+        
     def crear_barcoPequeño():
         salir = True
         while salir:
@@ -44,21 +68,18 @@ class barcos:
                         barcos.tamaño = 1
                         barcos.cords.append(PoX,PoY) 
                         taulell.lista_barcos.append(barcos)
+                        salir = False
     
     def crear_barcoGrande(tamaño):
         salir = True
         while salir:
             PoX = rd.randint(0, taulell.Filas - 1)
             PoY = rd.randint(0, taulell.Columnas - 1) 
-            if(PoX + (tamaño-1) > taulell.Filas or PoX - (tamaño -1) < 0) or (PoY + (tamaño - 1) > taulell.Columnas or PoY - (tamaño -1) < 0) :
-                pass
-                #guardar la direccion si solo queda 1, es decir, q si fallan todos menos arriba q se guarde 
-            else:
-                 for barcos in taulell.lista_barcos:
-                    for cords in barcos:
-                        if PoX == cords or PoY == cords:
-                            pass
-                        else: 
+            for barcos in taulell.lista_barcos:
+                for cords in barcos:
+                    if PoX == cords or PoY == cords:
+                        pass
+                    
                             #usar funcion de comprobar las direcciones  
                             
 
