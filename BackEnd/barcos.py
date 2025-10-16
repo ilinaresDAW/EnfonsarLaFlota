@@ -23,6 +23,13 @@ class taulell:
                 matriz.append(fila)
             taulell.tabla = matriz
             return matriz
+        
+    def cords_ocupadas(self):
+        ocupadas = set()
+        for barco in self.lista_barcos:
+            for cord in barco.cords:
+                ocupadas.add(cord)
+        return ocupadas
 
 # Crear barcos
 
@@ -31,29 +38,29 @@ class barcos:
         self.tamaño = tamaño
         self.cords = []
     
-    def comprobar_direccion(PoX, PoY, tamaño):
-        listaTemp = []
-        if PoX + (tamaño -1) <= (taulell.Filas - 1):
-            listaTemp.append(PoX + (tamaño -1))
-            if PoX - (tamaño -1) >= 0 :
-                listaTemp.append(PoX - (tamaño -1))
-                if PoY + (tamaño -1) <= (taulell.Columnas - 1):
-                    listaTemp.append(PoY + (tamaño -1))
-                    if PoY - (tamaño -1) >= 0:
-                        listaTemp.append(PoY - (tamaño -1))
-        elif PoX - (tamaño -1) >= 0 :
-            listaTemp.append(PoX - (tamaño -1))
-            if PoY + (tamaño -1) <= (taulell.Columnas - 1):
-                listaTemp.append(PoY + (tamaño -1))
-                if PoY - (tamaño -1) >= 0:
-                    listaTemp.append(PoY - (tamaño -1))
-        elif PoY + (tamaño -1) <= (taulell.Columnas - 1):
-            listaTemp.append(PoY + (tamaño -1))
-            if PoY - (tamaño -1) >= 0:
-                listaTemp.append(PoY - (tamaño -1))
-        elif PoY - (tamaño -1) >= 0:
-            listaTemp.append(PoY - (tamaño -1))
-        return listaTemp
+    def comprobar_direccion(self, PoX, PoY, direccion, tamaño):
+        coords = []
+        if direccion == 'X1':  # Horizontal arriba
+            if PoX + (tamaño - 1) > taulell.columnas - 1:
+                pass
+            for i in range(tamaño):
+                coords.append((PoY, PoX + i))
+        elif direccion == "X2":   # Horizontal abajo
+            if PoX - (tamaño - 1) > 0:
+                    pass
+            for i in range(tamaño):
+                coords.append((PoY, PoX - i))
+        elif direccion == 'Y1':  # Vertical arriba
+            if PoX + (tamaño - 1) > taulell.filas - 1:
+                pass
+            for i in range(tamaño):
+                coords.append((PoX, PoY + i))
+        elif direccion == "Y2": # Vertical abajo
+            if PoY - (tamaño - 1) > 0:
+                    pass
+            for i in range(tamaño):
+                coords.append((PoX, PoY - i))
+        return coords
         
     def crear_barcoPequeño():
         salir = True
@@ -70,17 +77,46 @@ class barcos:
                         taulell.lista_barcos.append(barcos)
                         salir = False
     
-    def crear_barcoGrande(tamaño):
+    def crear_barcoGrande(self, tamaño):
         salir = True
+        ocupado = taulell.cords_ocupadas
+        cordsBarco = []
+        cordsTemp = []
         while salir:
             PoX = rd.randint(0, taulell.Filas - 1)
-            PoY = rd.randint(0, taulell.Columnas - 1) 
-            for barcos in taulell.lista_barcos:
-                for cords in barcos:
-                    if PoX == cords or PoY == cords:
-                        pass
-                    
-                            #usar funcion de comprobar las direcciones  
-                            
+            PoY = rd.randint(0, taulell.Columnas - 1)
+            cordUsarX1 = self.comprobar_direccion(PoX, PoY, "X1", tamaño)
+            cordUsarX2 = self.comprobar_direccion(PoX, PoY, "X2", tamaño)
+            cordUsarY2 = self.comprobar_direccion(PoX, PoY, "Y2", tamaño)
+            cordUsarY1 = self.comprobar_direccion(PoX, PoY, "Y1", tamaño)
+            
+            for i in cordUsarX1:
+                if i == ocupado:
+                    cordsTemp.clear
+                    break
+                else:
+                    cordsTemp.append(i)
+            if cordsTemp != cordUsarX1:
+                for i in cordUsarX2:
+                    if i == ocupado:
+                        cordsTemp.clear
+                        break
+                    else:
+                        cordsTemp.append(i)
+            if cordsTemp != cordUsarX2:
+                for i in cordUsarY1:
+                    if i == ocupado:
+                        cordsTemp.clear
+                        break
+                    else:
+                        cordsTemp.append(i)
+            if cordsTemp != cordUsarY1:
+                for i in cordUsarY2:
+                    if i == ocupado:
+                        cordsTemp.clear
+                        break
+                    else:
+                        cordsTemp.append(i)
 
+            
 

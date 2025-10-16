@@ -13,7 +13,7 @@ def read_root():
 def crear_juego():
     return
 
-@app.get("/createShip//{game_id}/{Size}")
+@app.get("/createShip/{game_id}/{Size}")
 def crear_barco():
     return
 
