@@ -9,19 +9,19 @@ app = FastAPI(tittle="Hundir la flota", version="1.0.0")
 def read_root():
     return {"mensaje": "Hundir la flota!"}
 
-@app.get("/createGame/{game_id}/{dimension}/{nom}")
+@app.get("/createGame/{game_id}/{PoX}/{PoY}/{nom}")
+def crear_juego():
+    return
 
-@app.get("/shot/{game_id}/{cordsDisparo}")
+@app.get("/createShip//{game_id}/{Size}")
+def crear_barco():
+    return
+
+@app.get("/shot/{game_id}/{PoX}/{PoY}")
+def crear_disparo():
+    return
 
 @app.get("/game/{game_id}/")
+def juego():
+    return
 
-
-
-# Para añadir al compa
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500"],  
-    allow_credentials=True,
-    allow_methods=["*"],  
-    allow_headers=["*"],  
-)
