@@ -89,34 +89,36 @@ class barcos:
             cordUsarX2 = self.comprobar_direccion(PoX, PoY, "X2", tamaño)
             cordUsarY2 = self.comprobar_direccion(PoX, PoY, "Y2", tamaño)
             cordUsarY1 = self.comprobar_direccion(PoX, PoY, "Y1", tamaño)
-            
-            for i in cordUsarX1:
-                if i == ocupado:
-                    cordsTemp.clear
-                    break
-                else:
-                    cordsTemp.append(i)
-            if cordsTemp != cordUsarX1:
-                for i in cordUsarX2:
+            if not cordUsarX1 and not cordUsarX2 and not cordUsarY1 and not cordUsarY2:
+                pass
+            else:
+                for i in cordUsarX1:
                     if i == ocupado:
                         cordsTemp.clear
                         break
                     else:
                         cordsTemp.append(i)
-            if cordsTemp != cordUsarX2:
-                for i in cordUsarY1:
-                    if i == ocupado:
-                        cordsTemp.clear
-                        break
-                    else:
-                        cordsTemp.append(i)
-            if cordsTemp != cordUsarY1:
-                for i in cordUsarY2:
-                    if i == ocupado:
-                        cordsTemp.clear
-                        break
-                    else:
-                        cordsTemp.append(i)
+                if cordsTemp != cordUsarX1:
+                    for i in cordUsarX2:
+                        if i == ocupado:
+                            cordsTemp.clear
+                            break
+                        else:
+                            cordsTemp.append(i)
+                if cordsTemp != cordUsarX2:
+                    for i in cordUsarY1:
+                        if i == ocupado:
+                            cordsTemp.clear
+                            break
+                        else:
+                            cordsTemp.append(i)
+                if cordsTemp != cordUsarY1:
+                    for i in cordUsarY2:
+                        if i == ocupado:
+                            cordsTemp.clear
+                            break
+                        else:
+                            cordsTemp.append(i)
 
             
 
