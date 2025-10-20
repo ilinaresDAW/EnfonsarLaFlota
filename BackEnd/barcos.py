@@ -3,12 +3,13 @@ import random as rd
 
 # Clase taulell
 class taulell:
-    def __init__(self, Filas, Columnas, tabla, lista_barcos):
-        self.Filas = Filas
-        self.Columnas = Columnas
+    
+    def __init__(self, filas, columnas):
+        self.Filas = filas
+        self.Columnas = columnas
         self.tabla = []
         self.lista_barcos = []
-    
+
     # creo funcion para añadir barcos desde la clase barcos
     def añadirlistabarco (self, barcos):
         self.lista_barcos.append(barcos)
@@ -27,7 +28,7 @@ class taulell:
                     fila.append("X")
                 matriz.append(fila)
             self.tabla = matriz
-            return matriz
+            return self.tabla
     
     # funcion para verificar si ya hay algun barco con esas cords
     def cords_ocupadas(self):
@@ -40,31 +41,31 @@ class taulell:
 # Clase barocs
 
 class barcos:
-    def __init__(self, tamaño, cords):
+    def __init__(self, tamaño ):
         self.tamaño = tamaño
         self.cords = []
     
     # compruebo si no me salgo de la matriz em todos los lados, si es el caso q en un lado funciona paso solamente ese
     def comprobar_direccion(self, PoX, PoY, direccion, tamaño):
         coords = []
-        if direccion == 'X1':  # Horizontal arriba
-            if PoX + (tamaño - 1) > taulell.columnas - 1:
-                pass
+        if direccion == 'X1':  # Horizontal derecha
+            if PoX + (tamaño - 1) >= self.taulell.Filas:
+                return []
             for i in range(tamaño):
-                coords.append((PoY, PoX + i))
-        elif direccion == "X2":   # Horizontal abajo
-            if PoX - (tamaño - 1) > 0:
-                    pass
+                coords.append((PoX + i, PoY))
+        elif direccion == "X2":   # Horizontal izquierda
+            if PoX - (tamaño - 1) < 0:
+                return []
             for i in range(tamaño):
-                coords.append((PoY, PoX - i))
-        elif direccion == 'Y1':  # Vertical arriba
-            if PoX + (tamaño - 1) > taulell.filas - 1:
-                pass
+                coords.append((PoX - i, PoY))
+        elif direccion == 'Y2':  # Vertical abajo
+            if PoY + (tamaño - 1) >= self.taulell.Columnas:
+                return []
             for i in range(tamaño):
                 coords.append((PoX, PoY + i))
-        elif direccion == "Y2": # Vertical abajo
-            if PoY - (tamaño - 1) > 0:
-                    pass
+        elif direccion == "Y1": # Vertical arriba
+            if PoY - (tamaño - 1) < 0:
+                return []
             for i in range(tamaño):
                 coords.append((PoX, PoY - i))
         return coords
@@ -72,18 +73,19 @@ class barcos:
     # creo barco pequeño usando funcionas ya creadas para ayudarme
     def crear_barcoPequeño(self):
         salir = True
-        cordsTemp = []
         while salir:
-            PoX = rd.randint(0, taulell.Filas - 1)
-            PoY = rd.randint(0, taulell.Columnas - 1)
-            if (PoX and PoY) in taulell.cords_ocupadas:
-                pass
-            else:   
-                cordsTemp = (PoX, PoY)
+            PoX = rd.randint(0, self.taulell.Filas - 1)  # 👈 self.taulell
+            PoY = rd.randint(0, self.taulell.Columnas - 1)
+            
+            if (PoX, PoY) in self.taulell.cords_ocupadas():  # 👈 self.taulell
+                continue  # Sigue buscando
+            else:
+                self.cords = [(PoX, PoY)]  # Lista de tuplas
                 self.tamaño = 1
-                self.cords = cordsTemp
-                taulell.añadirlistabarco(barcos)
+                self.taulell.añadirlistabarco(self)  # 👈 self (instancia actual)
                 salir = False
+        
+        return self.cords
     
     def crear_barcoGrande(self, tamaño):
         salir = True
