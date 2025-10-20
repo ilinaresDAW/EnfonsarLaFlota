@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import barcos as b
 
 # Crear la aplicación
 app = FastAPI(tittle="Hundir la flota", version="1.0.0")
@@ -10,7 +11,7 @@ def read_root():
     return {"mensaje": "Hundir la flota!"}
 
 @app.get("/createGame/{game_id}/{PoX}/{PoY}/{nom}")
-def crear_juego():
+def crear_juego(fila, columna):
     return
 
 @app.get("/createShip/{game_id}/{Size}")
