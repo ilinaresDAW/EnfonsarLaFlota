@@ -8,20 +8,23 @@ class taulell:
         self.Columnas = Columnas
         self.tabla = []
         self.lista_barcos = []
+        
+    def añadirlistabarco (self, barcos):
+        self.lista_barcos.append(barcos)
 
-    def crear_matriz(filas, columnas):
+    def crear_matriz(self, filas, columnas):
         if filas < 7 or columnas < 7: 
             return "La matriz debe ser mayor a 7x7"
         else:  
-            taulell.Filas = filas
-            taulell.Columnas = columnas
+            self.Filas = filas
+            self.Columnas = columnas
             matriz = []
             for i in range(filas):
                 fila = []
                 for j in range(columnas):
                     fila.append("X")
                 matriz.append(fila)
-            taulell.tabla = matriz
+            self.tabla = matriz
             return matriz
         
     def cords_ocupadas(self):
@@ -62,8 +65,9 @@ class barcos:
                 coords.append((PoX, PoY - i))
         return coords
         
-    def crear_barcoPequeño():
+    def crear_barcoPequeño(self):
         salir = True
+        cordsTemp = []
         while salir:
             PoX = rd.randint(0, taulell.Filas - 1)
             PoY = rd.randint(0, taulell.Columnas - 1)
@@ -72,9 +76,10 @@ class barcos:
                     if PoX == cords or PoY == cords:
                         pass
                     else:   
-                        barcos.tamaño = 1
-                        barcos.cords.append(PoX,PoY) 
-                        taulell.lista_barcos.append(barcos)
+                        cordsTemp = (PoX, PoY)
+                        self.tamaño = 1
+                        self.cords = cordsTemp
+                        taulell.añadirlistabarco(barcos)
                         salir = False
     
     def crear_barcoGrande(self, tamaño):
@@ -119,6 +124,12 @@ class barcos:
                             break
                         else:
                             cordsTemp.append(i)
+            cordsBarco = cordsTemp
+            self.tamaño = tamaño
+            self.cords = cordsBarco
+            taulell.añadirlistabarco(barcos)
+            salir = False
+            
 
             
 
