@@ -37,21 +37,29 @@ def crear_barcoS(game_id: str):
         "status": "created successfully"
     }
 
-@app.get("/createShipBig/{game_id}/{tamaño}")
-def crear_barcoB(game_id: str, tamaño: int):
-    nuevo_barco = b.barcos(tamaño, mi_taulell)
-    resultado = nuevo_barco.crear_barcoGrande(tamaño)
-    return{
-        "game_id": game_id,
-        "barco": resultado,
-        "status": "created successfully"
-    }
+@app.get("/createShipBig/{game_id}/{medida}")
+def crear_barcoB(game_id: str, medida: int):
+    nuevo_barco = b.barcos(medida, mi_taulell)
+    resultado = nuevo_barco.crear_barcoGrande(medida)
+    if isinstance(resultado, str):  # Si da error enseña el mensaje
+        return {"error": resultado}
+    else:  # Si funciona da el resultado
+        return{
+            "game_id": game_id,
+            "barco": resultado,
+            "status": "created successfully"
+        }
 
 @app.get("/shot/{game_id}/{PoX}/{PoY}")
 def crear_disparo():
     return
 
 @app.get("/game/{game_id}/")
-def juego():
-    return
+def juego(game_id: str):
+    resultado = mi_taulell.mostrar_partida()
+    return{
+        "game_id": game_id,
+        "partida": resultado,
+        "status": "created successfully"
+    }
 

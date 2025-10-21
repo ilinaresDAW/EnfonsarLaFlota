@@ -9,6 +9,8 @@ class taulell:
         self.Columnas = columnas
         self.tabla = []
         self.lista_barcos = []
+        self.puntuacion = 1000
+        self.historial_disparo = []
 
     # creo funcion para añadir barcos desde la clase barcos
     def añadirlistabarco (self, barcos):
@@ -37,6 +39,50 @@ class taulell:
             for cord in barco.cords:
                 ocupadas.add(cord)
         return ocupadas
+    def cords_ocupadas(self):
+        ocupadas = set()# lo paso a set para mejor rendimiento
+        for barco in self.lista_barcos:
+            ocupadas.update(barco.cords)  # ✅ MÁS EFICIENTE
+        return ocupadas
+    
+    # Muestro la partida del jugador ID
+    def mostrar_partida(self):
+        return {
+            "matriz": self.tabla,
+            "barcos": [
+                {
+                    "tamaño": barco.tamaño,
+                    "coordenadas": barco.cords,
+                    "estado": "activo" if len(barco.cords) > 0 else "hundido"
+                }
+                for barco in self.lista_barcos
+            ],
+            "puntuacion": self.puntuacion,
+            "historial_disparos": self.historial_disparos
+        }
+    
+    #registrar los dipsaros y los puntos acorde a la palabra
+    def registrar_disparo(self,resultado, PoX, PoY):
+            puntos = 0
+            if resultado == "agua":
+                puntos = -10
+            elif resultado == "tocado":
+                puntos = +20
+            elif resultado == "hundido":
+                puntos = +50
+            self.historial_disparos.append({
+            "coordenadas": (PoX, PoY),
+            "resultado": resultado,
+            "puntos": puntos
+            })
+            if resultado == "agua":
+                self.puntuacion -= 10
+            elif resultado == "tocado":
+                self.puntuacion += 20
+            elif resultado == "hundido":
+                self.puntuacion += 50 
+            
+
 
 # Clase barocs
 
@@ -89,29 +135,67 @@ class barcos:
         return self.cords
     
     def crear_barcoGrande(self, tamaño):
-        salir = True
-        while salir:
-            PoX = rd.randint(0, self.taulell.Filas - 1)
-            PoY = rd.randint(0, self.taulell.Columnas - 1)
-            
-            direcciones = [
-                self.comprobar_direccion(PoX, PoY, "X1", tamaño),
-                self.comprobar_direccion(PoX, PoY, "X2", tamaño),
-                self.comprobar_direccion(PoX, PoY, "Y1", tamaño),
-                self.comprobar_direccion(PoX, PoY, "Y2", tamaño)
-            ]
-            #Explicar este for = Pendiente
-            for coords in direcciones:
-                if len(coords) == tamaño:
-                    ocupado = self.taulell.cords_ocupadas()
-                    if all(coord not in ocupado for coord in coords):
-                        self.cords = coords
-                        self.tamaño = tamaño
-                        self.taulell.añadirlistabarco(self)
-                        salir = False
-                        break        
-        return self.cords
-            
+        if tamaño > 5:
+            return "Tamaño incorrecto"
+        else:
+            salir = True
+            while salir:
+                PoX = rd.randint(0, self.taulell.Filas - 1)
+                PoY = rd.randint(0, self.taulell.Columnas - 1)
+                
+                direcciones = [
+                    self.comprobar_direccion(PoX, PoY, "X1", tamaño),
+                    self.comprobar_direccion(PoX, PoY, "X2", tamaño),
+                    self.comprobar_direccion(PoX, PoY, "Y1", tamaño),
+                    self.comprobar_direccion(PoX, PoY, "Y2", tamaño)
+                ]
+                #Explicar este for = Pendiente
+                for coords in direcciones:
+                    if len(coords) == tamaño:
+                        ocupado = self.taulell.cords_ocupadas() 
+                        if all(coord not in ocupado for coord in coords):
+                            self.cords = coords
+                            self.tamaño = tamaño
+                            self.taulell.añadirlistabarco(self)
+                            salir = False
+                            break        
+            return self.cords
 
-            
-
+    def disparo(self, PoX, PoY):        
+        if PoX >= self.taulell.Filas or PoY >= self.taulell.Columnas or PoX < 0 or PoY < 0:
+            return "Fuera de la tabla"
+        else:
+            barco_tocado = 0
+            for barco in self.taulell.lista_barcos:
+                if(PoX, PoY) in barco.cords:
+                    barco_tocado = barco
+                    break
+            if barco_tocado == 0:
+                resultado = "agua"
+                self.taulell.registrar_disparo(resultado, PoX, PoY)
+                return {
+                    "resultado": resultado,
+                    "coordenadas": (PoX, PoY),
+                    "puntos": 0,
+                    "total_puntos": self.taulell.puntuacion
+                }  
+            barco_tocado.cords.remove((PoX, PoY))
+            if len(barco_tocado.cords) == 0:  
+                resultado = "hundido"
+                self.taulell.registrar_disparo(resultado, PoX, PoY)  
+                return{
+                    "resultado": resultado,
+                    "coordenadas": (PoX, PoY),
+                    "puntos": 20,
+                    "total_puntos": self.taulell.puntuacion
+                } 
+            else:
+                resultado = "tocado"
+                self.taulell.registrar_disparo(resultado, PoX, PoY)
+                return {
+                    "resultado": "tocado",
+                    "coordenadas": (PoX, PoY),
+                    "barco_tamaño": barco_tocado.tamaño,
+                    "puntos_ganados": 50,
+                    "total_puntos": self.taulell.puntuacion
+                }
