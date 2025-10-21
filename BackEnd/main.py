@@ -6,7 +6,7 @@ import generadorID as id
 # Crear la aplicación
 app = FastAPI(tittle="Hundir la flota", version="1.0.0")
 mi_taulell = b.taulell(7,7) 
-mi_barco = b.barcos(1)
+mi_barco = b.barcos(1, mi_taulell)
 # Ruta raíz
 @app.get("/")
 def read_root():
@@ -27,7 +27,7 @@ def crear_juego(game_id: str,PoX: int, PoY: int): # Crear instancia
         }
 
 
-@app.get("/createShip/{game_id}")
+@app.get("/createShipSmall/{game_id}")
 def crear_barco(game_id: str):
     resultado = mi_barco.crear_barcoPequeño()
     return{

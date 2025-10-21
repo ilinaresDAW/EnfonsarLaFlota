@@ -41,9 +41,10 @@ class taulell:
 # Clase barocs
 
 class barcos:
-    def __init__(self, tamaño ):
+    def __init__(self, tamaño, taulell = None  ):#pngo taulell q es none ya q si creo barco no podria acceder a los datos del taulell
         self.tamaño = tamaño
         self.cords = []
+        self.taulell = taulell
     
     # compruebo si no me salgo de la matriz em todos los lados, si es el caso q en un lado funciona paso solamente ese
     def comprobar_direccion(self, PoX, PoY, direccion, tamaño):
