@@ -4,7 +4,7 @@ import barcos as b
 import generadorID as id
 
 # Crear la aplicación
-app = FastAPI(tittle="Hundir la flota", version="1.0.0")
+app = FastAPI(title="Hundir la flota", version="1.0.0")
 mi_taulell = b.taulell(7,7) 
 mi_barco = b.barcos(1, mi_taulell)
 # Ruta raíz
@@ -13,12 +13,12 @@ def read_root():
     return {"mensaje": "Hundir la flota!"}
 
 @app.get("/createGame/{game_id}/{PoX}/{PoY}")
-def crear_juego(game_id: str,PoX: int, PoY: int): # Crear instancia
-    resultado = mi_taulell.crear_matriz(PoX, PoY)  # Store the result
+def crear_juego(game_id: str,PoX: int, PoY: int):
+    resultado = mi_taulell.crear_matriz(PoX, PoY) 
     
-    if isinstance(resultado, str):  # If it's an error message
+    if isinstance(resultado, str):  # Si da error enseña el mensaje
         return {"error": resultado}
-    else:  # If it's the matrix
+    else:  # Si funciona da el resultado
         return {
             "game_id": game_id,
             "matrix": resultado,
@@ -28,8 +28,19 @@ def crear_juego(game_id: str,PoX: int, PoY: int): # Crear instancia
 
 
 @app.get("/createShipSmall/{game_id}")
-def crear_barco(game_id: str):
-    resultado = mi_barco.crear_barcoPequeño()
+def crear_barcoS(game_id: str):
+    nuevo_barco = b.barcos(1, mi_taulell)
+    resultado = nuevo_barco.crear_barcoPequeño()
+    return{
+        "game_id": game_id,
+        "barco": resultado,
+        "status": "created successfully"
+    }
+
+@app.get("/createShipBig/{game_id}/{tamaño}")
+def crear_barcoB(game_id: str, tamaño: int):
+    nuevo_barco = b.barcos(tamaño, mi_taulell)
+    resultado = nuevo_barco.crear_barcoGrande(tamaño)
     return{
         "game_id": game_id,
         "barco": resultado,

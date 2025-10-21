@@ -41,7 +41,7 @@ class taulell:
 # Clase barocs
 
 class barcos:
-    def __init__(self, tamaño, taulell = None  ):#pngo taulell q es none ya q si creo barco no podria acceder a los datos del taulell
+    def __init__(self, tamaño, taulell = None  ):#pongo taulell q es none ya q si creo barco no podria acceder a los datos del taulell
         self.tamaño = tamaño
         self.cords = []
         self.taulell = taulell
@@ -75,66 +75,42 @@ class barcos:
     def crear_barcoPequeño(self):
         salir = True
         while salir:
-            PoX = rd.randint(0, self.taulell.Filas - 1)  # 👈 self.taulell
+            PoX = rd.randint(0, self.taulell.Filas - 1)  
             PoY = rd.randint(0, self.taulell.Columnas - 1)
             
-            if (PoX, PoY) in self.taulell.cords_ocupadas():  # 👈 self.taulell
-                continue  # Sigue buscando
+            if (PoX, PoY) in self.taulell.cords_ocupadas():  
+                continue  # sigue buscando
             else:
-                self.cords = [(PoX, PoY)]  # Lista de tuplas
+                self.cords = [(PoX, PoY)]
                 self.tamaño = 1
-                self.taulell.añadirlistabarco(self)  # 👈 self (instancia actual)
+                self.taulell.añadirlistabarco(self) 
                 salir = False
         
         return self.cords
     
     def crear_barcoGrande(self, tamaño):
         salir = True
-        ocupado = taulell.cords_ocupadas
-        cordsBarco = []
-        cordsTemp = []
         while salir:
-            PoX = rd.randint(0, taulell.Filas - 1)
-            PoY = rd.randint(0, taulell.Columnas - 1)
-            cordUsarX1 = self.comprobar_direccion(PoX, PoY, "X1", tamaño)
-            cordUsarX2 = self.comprobar_direccion(PoX, PoY, "X2", tamaño)
-            cordUsarY2 = self.comprobar_direccion(PoX, PoY, "Y2", tamaño)
-            cordUsarY1 = self.comprobar_direccion(PoX, PoY, "Y1", tamaño)
-            if not cordUsarX1 and not cordUsarX2 and not cordUsarY1 and not cordUsarY2:
-                pass
-            else:
-                for i in cordUsarX1:
-                    if i == ocupado:
-                        cordsTemp.clear
-                        break
-                    else:
-                        cordsTemp.append(i)
-                if cordsTemp != cordUsarX1:
-                    for i in cordUsarX2:
-                        if i == ocupado:
-                            cordsTemp.clear
-                            break
-                        else:
-                            cordsTemp.append(i)
-                if cordsTemp != cordUsarX2:
-                    for i in cordUsarY1:
-                        if i == ocupado:
-                            cordsTemp.clear
-                            break
-                        else:
-                            cordsTemp.append(i)
-                if cordsTemp != cordUsarY1:
-                    for i in cordUsarY2:
-                        if i == ocupado:
-                            cordsTemp.clear
-                            break
-                        else:
-                            cordsTemp.append(i)
-            cordsBarco = cordsTemp
-            self.tamaño = tamaño
-            self.cords = cordsBarco
-            taulell.añadirlistabarco(barcos)
-            salir = False
+            PoX = rd.randint(0, self.taulell.Filas - 1)
+            PoY = rd.randint(0, self.taulell.Columnas - 1)
+            
+            direcciones = [
+                self.comprobar_direccion(PoX, PoY, "X1", tamaño),
+                self.comprobar_direccion(PoX, PoY, "X2", tamaño),
+                self.comprobar_direccion(PoX, PoY, "Y1", tamaño),
+                self.comprobar_direccion(PoX, PoY, "Y2", tamaño)
+            ]
+            #Explicar este for = Pendiente
+            for coords in direcciones:
+                if len(coords) == tamaño:
+                    ocupado = self.taulell.cords_ocupadas()
+                    if all(coord not in ocupado for coord in coords):
+                        self.cords = coords
+                        self.tamaño = tamaño
+                        self.taulell.añadirlistabarco(self)
+                        salir = False
+                        break        
+        return self.cords
             
 
             
