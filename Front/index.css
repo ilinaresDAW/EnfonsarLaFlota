@@ -2,7 +2,7 @@ body{
     display: flex;
 }
 #tabla {
-    background-color: blue;
+    background-color: rgb(132, 132, 241);
     width: 100px;
 }
 
@@ -37,5 +37,4 @@ body{
     margin-left: 300px;
     background-color: aqua;
     width: 300px;
-    display: flex;
 }
