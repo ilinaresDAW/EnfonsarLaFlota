@@ -6,7 +6,7 @@ import generadorID as id
 # Crear la aplicación
 app = FastAPI(title="Hundir la flota", version="1.0.0")
 mi_taulell = b.taulell(7,7) 
-mi_barco = b.barcos(1, mi_taulell)
+
 # Ruta raíz
 @app.get("/")
 def read_root():
@@ -51,8 +51,16 @@ def crear_barcoB(game_id: str, medida: int):
         }
 
 @app.get("/shot/{game_id}/{PoX}/{PoY}")
-def crear_disparo():
-    return
+def crear_disparo(game_id: str, PoX: int, PoY: int):
+    if mi_taulell.lista_barcos:
+        resultado = mi_taulell.lista_barcos[0].disparo(PoX, PoY)
+    else:
+        resultado = {"error": "No hay barcos creados"}
+    return{
+        "game_id": game_id,
+        "resultado del disparo": resultado,
+        "status": "created succesfully"
+    }
 
 @app.get("/game/{game_id}/")
 def juego(game_id: str):

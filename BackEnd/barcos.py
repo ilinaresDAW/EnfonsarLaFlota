@@ -10,7 +10,7 @@ class taulell:
         self.tabla = []
         self.lista_barcos = []
         self.puntuacion = 1000
-        self.historial_disparo = []
+        self.historial_disparos = []
 
     # creo funcion para añadir barcos desde la clase barcos
     def añadirlistabarco (self, barcos):
@@ -36,13 +36,7 @@ class taulell:
     def cords_ocupadas(self):
         ocupadas = set()# lo paso a set para mejor rendimiento
         for barco in self.lista_barcos:
-            for cord in barco.cords:
-                ocupadas.add(cord)
-        return ocupadas
-    def cords_ocupadas(self):
-        ocupadas = set()# lo paso a set para mejor rendimiento
-        for barco in self.lista_barcos:
-            ocupadas.update(barco.cords)  # ✅ MÁS EFICIENTE
+            ocupadas.update(barco.cords) 
         return ocupadas
     
     # Muestro la partida del jugador ID
@@ -165,18 +159,18 @@ class barcos:
         if PoX >= self.taulell.Filas or PoY >= self.taulell.Columnas or PoX < 0 or PoY < 0:
             return "Fuera de la tabla"
         else:
-            barco_tocado = 0
+            barco_tocado = None # Cambiar de 0 a None ya q detecta 0 cada vez q lo busca en vez de las cords(basicamente es false)
             for barco in self.taulell.lista_barcos:
                 if(PoX, PoY) in barco.cords:
                     barco_tocado = barco
                     break
-            if barco_tocado == 0:
+            if barco_tocado == None:
                 resultado = "agua"
                 self.taulell.registrar_disparo(resultado, PoX, PoY)
                 return {
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
-                    "puntos": 0,
+                    "puntos": -10,
                     "total_puntos": self.taulell.puntuacion
                 }  
             barco_tocado.cords.remove((PoX, PoY))
@@ -186,7 +180,7 @@ class barcos:
                 return{
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
-                    "puntos": 20,
+                    "puntos": +20,
                     "total_puntos": self.taulell.puntuacion
                 } 
             else:
@@ -196,6 +190,6 @@ class barcos:
                     "resultado": "tocado",
                     "coordenadas": (PoX, PoY),
                     "barco_tamaño": barco_tocado.tamaño,
-                    "puntos_ganados": 50,
+                    "puntos_ganados": +50,
                     "total_puntos": self.taulell.puntuacion
                 }
