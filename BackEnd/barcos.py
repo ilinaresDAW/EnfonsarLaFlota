@@ -180,7 +180,7 @@ class barcos:
                 return{
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
-                    "puntos": +20,
+                    "puntos": +50,
                     "total_puntos": self.taulell.puntuacion
                 } 
             else:
@@ -190,6 +190,6 @@ class barcos:
                     "resultado": "tocado",
                     "coordenadas": (PoX, PoY),
                     "barco_tamaño": barco_tocado.tamaño,
-                    "puntos_ganados": +50,
+                    "puntos_ganados": +20,
                     "total_puntos": self.taulell.puntuacion
                 }
