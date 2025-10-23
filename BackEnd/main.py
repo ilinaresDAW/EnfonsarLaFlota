@@ -7,21 +7,37 @@ import generadorID as id
 app = FastAPI(title="Hundir la flota", version="1.0.0")
 mi_taulell = b.taulell(7,7) 
 
+# Configurar CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://127.0.0.1:5500"],  # Permitir el origen de tu front-end
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Ruta raíz
 @app.get("/")
 def read_root():
     return {"mensaje": "Hundir la flota!"}
 
 @app.get("/createGame/{game_id}/{PoX}/{PoY}")
-def crear_juego(game_id: str,PoX: int, PoY: int):
-    resultado = mi_taulell.crear_matriz(PoX, PoY) 
-    
+def crear_juego(game_id: str, PoX: int, PoY: int):
+    resultado = mi_taulell.crear_matriz(PoX, PoY)
     if isinstance(resultado, str):  # Si da error enseña el mensaje
         return {"error": resultado}
-    else:  # Si funciona da el resultado
+    else:  # Si funciona, genera barcos automáticamente
+        mi_taulell.generar_barcos_automaticos()
         return {
             "game_id": game_id,
             "matrix": resultado,
+            "barcos": [
+                {
+                    "tamaño": barco.tamaño,
+                    "coordenadas": barco.cords
+                }
+                for barco in mi_taulell.lista_barcos
+            ],
             "status": "created successfully",
             "size": {"rows": PoX, "cols": PoY}
         }

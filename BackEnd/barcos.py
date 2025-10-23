@@ -12,11 +12,11 @@ class taulell:
         self.puntuacion = 1000
         self.historial_disparos = []
 
-    # creo funcion para añadir barcos desde la clase barcos
+    # Añadir barcos desde la clase barcos
     def añadirlistabarco (self, barcos):
         self.lista_barcos.append(barcos)
 
-    # creo la matriz y devuelvo mensaje si esta mal
+    # Crear la matriz y devolver mensaje si está mal
     def crear_matriz(self, filas, columnas):
         if filas < 7 or columnas < 7: 
             return "La matriz debe ser mayor a 7x7"
@@ -32,9 +32,35 @@ class taulell:
             self.tabla = matriz
             return self.tabla
     
-    # funcion para verificar si ya hay algun barco con esas cords
+    def generar_barcos_auto(self):
+        totalMatriz = self.Filas * self.Columnas
+        maxTamaño = int(totalMatriz * 0.33)  # Max 33% de las celdas
+        celdasOcupadas = 0
+        tamañoDisponible = [1, 2, 3, 4, 5]  
+        max_intentos = 1000  #Creo esta variable de intentos para q no este siemple en un constante bucle y no se pete, es decir, un limite
+        intentos = 0
+
+        while celdasOcupadas < maxTamaño and intentos < max_intentos:
+            tamaño = rd.choice(tamañoDisponible)  # Seleccionar tamaño aleatorio
+            if celdasOcupadas + tamaño > maxTamaño:
+                intentos += 1
+                continue
+            barco1 = barcos(tamaño, self)
+            if tamaño == 1:
+                resultado = barco1.crear_barcoPequeño()
+            else:
+                resultado = barco1.crear_barcoGrande(tamaño)
+            if isinstance(resultado, str):  # Si hay error, intentar de nuevo
+                intentos += 1
+                continue
+            celdasOcupadas += tamaño  # Actualizar celdas ocupadas
+            intentos = 0  # Resetear intentos tras éxito
+        if intentos >= max_intentos:
+            print("Deja de funcionar por bucle infinito MAX INTNETOS")
+    
+    # Verificar si ya hay algún barco con esas coordenadas
     def cords_ocupadas(self):
-        ocupadas = set()# lo paso a set para mejor rendimiento
+        ocupadas = set()# Lo paso a set para mejor rendimiento
         for barco in self.lista_barcos:
             ocupadas.update(barco.cords) 
         return ocupadas
