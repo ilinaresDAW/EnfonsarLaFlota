@@ -9,18 +9,26 @@
 </head>
 
 <body>
-    <h1 class="titulo">Enfosar la flota</h1>
+    <header>
+         <h1 class="titulo">Enfosar la flota</h1>
+    </header>
+   
     <hr>
     <div class="pagina">
         <div id="bloc1" class="bloc1">
             <h2>Configuracion del Juego</h2>
-            <label for="filas">Número de filas 7-20</label><input type="number" id="filas" min="7" max="20"><br>
-            <label for="columnas">Número de columnas 7-20 </label><input type="number" id="columnas" min="7"
-                max="20"><br>
+            <div class="medidas">
+                <div class="filas">
+                    <label for="filas">Amplada 7-20</label></br><input type="number" id="filas" min="7" max="20"><br>
+                </div>
+                <div class="columnas">
+                    <label for="columnas">Alçada 7-20 </label><br><input type="number" id="columnas" min="7" max="20"><br>
+                </div>
+            </div>
             <label for="nombre">Nombre de usuario </label><input type="text" id="nombre"><br>
             <button id="datos">Enviar datos</button>
             <!--<input type="button" value="Genera una tabla" onclick="genera_tabla()" />-->
-
+            <div class="difcultad" id="dificultad">Dificultad</div>
 
         </div>
         <div id="bloc2" class="bloc2">

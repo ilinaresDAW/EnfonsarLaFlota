@@ -29,87 +29,102 @@ boton.addEventListener('click', async (event) => {
                 console.error("Error al enviar datos:", error);
             });
         document.getElementById(`jugador`).textContent = `Jugador: ` + nombre
-        
-                //Generacion de la tabla
-                let celdas = ""
-                let dimX = filas, dimY = columnas //Dimensiones de la tabla
-                for (let i = 0; i < dimX; i++) {
-                    celdas += "<tr>"
-                    for (let j = 0; j < dimY; j++) {
-                        celdas += "<td  id=" + i + j + ">*</td>"
-                    }
-                    celdas += "</tr>"
-                }
-                document.getElementById("tabla").innerHTML = celdas
-        
-       /* function genera_tabla() {
-            let dimX = filas, dimY = columnas //Dimensiones de la tabla
-            let tabla = document.createElement("table")
-            let tbody = document.createElement("tbody")
-            for (let i = 0; i < dimX; i++) {
-                let fila = document.createElement("tr")
-                for (let j = 0; j < dimY; j++) {
-                    let celda = document.createElement("td")
-                    celda.id = i, j
-                    fila.appendChild(celda)
-                }
-                tbody.appendChild(fila)
+
+        //Generacion de la tabla
+        let celdas = ""
+        let dimX = filas, dimY = columnas //Dimensiones de la tabla
+        for (let i = 0; i < dimX; i++) {
+            celdas += "<tr>"
+            for (let j = 0; j < dimY; j++) {
+                celdas += "<td  id=" + i + j + ">*</td>"
             }
-            tabla.appendChild(tbody)
-            document.getElementById("tabla").appendChild(tabla)
-        }*/
-            //Mecanica de disparo
-            let disparos = 0 //Variable para contar numero de disparos
-            let disparoFallados = 0
-            let hundidos = 0
-            let puntos = 0
-            for (let i = 0; i < dimX; i++) {
-                for (let j = 0; j < dimY; j++) {
-                    document.getElementById(i + '' + j).addEventListener('click', async (event) => {
-                        if (event.target.classList.contains(`tocado` || `agua` || `hundido`)) {
-                            return
-                        }  //if para si la casilla ya tiene la clase tocado no pueda volver a hacer click !!cambiar porque si es agua se podria clickar mas!!
-                        event.target.innerHTML = `-`
-                        event.target.classList.add(`agua`)
-                        disparoFallados++
-                        document.getElementById('disparosFallados').textContent = `Disparos Fallados ` + disparoFallados
-                        fetch(`http://127.0.0.1:8000/shot/${idPartida}/${filas}/${columnas}`)
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log("Listado", data);
-                                if (data.resultat === `agua`) {
-                                    event.target.classList.add(`agua`)
-                                    event.target.innerHTML = `-`
-                                    disparoFallados++
-                                    document.getElementById(`disparosFallados`).textContent = `Disparos Fallados ` + disparoFallados
+            celdas += "</tr>"
+        }
+        document.getElementById("tabla").innerHTML = celdas
 
-                                } else if (data.resultat === `tocado`) {
-                                    event.target.innerHTML = `1`
-                                    event.target.classList.add(`tocado`)
-                                    disparos++
-                                    document.getElementById(`disparos`).textContent = "Disparos " + disparos
+        /* function genera_tabla() {
+             let dimX = filas, dimY = columnas //Dimensiones de la tabla
+             let tabla = document.createElement("table")
+             let tbody = document.createElement("tbody")
+             for (let i = 0; i < dimX; i++) {
+                 let fila = document.createElement("tr")
+                 for (let j = 0; j < dimY; j++) {
+                     let celda = document.createElement("td")
+                     celda.id = i, j
+                     fila.appendChild(celda)
+                 }
+                 tbody.appendChild(fila)
+             }
+             tabla.appendChild(tbody)
+             document.getElementById("tabla").appendChild(tabla)
+         }*/
 
-                                } else if (data.resultat === `hundido`) {
-                                    event.target.classList.add(`hundido`)
-                                    event.target.innerHTML = `!`
-                                    hundidos++
-                                    document.getElementById(`hundido`)
+        //Nivel difcultad
+        let dificultad = document.getElementById("difcultad")
+        if (dimX === 7 && dimY === 7 || dimX <= 10 && dimY <= 10) {
+            console.log(`difulctad establecida facil`)
+            document.getElementById(`dificultad`).textContent = `Facil`
+        } else if (dimX === 11 && dimY === 11 || dimX <= 15 && dimY <= 15) {
+            console.log(`difulctad establecida media`)
+            document.getElementById(`dificultad`).textContent = `Media`
+        } else {
+            console.log(`difulctad establecida dificil`)
+            document.getElementById(`dificultad`).textContent = `Dificil`
 
-                                }
-                                puntos = data.puntos
-                                document.getElementById(`puntos`).textContent = `Puntos: ` + puntos
-                            })
-                            .catch(error => {
-                                console.error("Error al enviar datos:", error);
-                            });
+        }
+        //Mecanica de disparo
+        let disparos = 0 //Variable para contar numero de disparos
+        let disparoFallados = 0
+        let hundidos = 0
+        let puntos = 0
+        for (let i = 0; i < dimX; i++) {
+            for (let j = 0; j < dimY; j++) {
+                document.getElementById(i + '' + j).addEventListener('click', async (event) => {
+                    if (event.target.classList.contains(`tocado` || `agua` || `hundido`)) {
+                        return
+                    }  //if para si la casilla ya tiene la clase tocado no pueda volver a hacer click !!cambiar porque si es agua se podria clickar mas!!
+                    event.target.innerHTML = `-`
+                    event.target.classList.add(`agua`)
+                    disparoFallados++
+                    document.getElementById('disparosFallados').textContent = `Disparos Fallados ` + disparoFallados
+                    fetch(`http://127.0.0.1:8000/shot/${idPartida}/${filas}/${columnas}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("Listado", data);
+                            if (data.resultado === `agua`) {
+                                event.target.classList.add(`agua`)
+                                event.target.innerHTML = `-`
+                                disparoFallados++
+                                document.getElementById(`disparosFallados`).textContent = `Disparos Fallados ` + disparoFallados
+
+                            } else if (data.resultado === `tocado`) {
+                                event.target.innerHTML = `1`
+                                event.target.classList.add(`tocado`)
+                                disparos++
+                                document.getElementById(`disparos`).textContent = "Disparos " + disparos
+
+                            } else if (data.resultado === `hundido`) {
+                                event.target.classList.add(`hundido`)
+                                event.target.innerHTML = `!`
+                                hundidos++
+                                document.getElementById(`hundido`)
+
+                            }
+                            puntos = data.puntos
+                            document.getElementById(`puntos`).textContent = `Puntos: ` + puntos
+                        })
+                        .catch(error => {
+                            console.error("Error al enviar datos:", error);
+                        });
 
 
 
 
-                        console.log('Click en ' + i + '' + j)
+                    console.log('Click en ' + i + '' + j)
 
-                    })
-                }
+                })
             }
+        }
 
-        }})
+    }
+})
