@@ -73,7 +73,7 @@ boton.addEventListener('click', async (event) => {
                         event.target.classList.add(`agua`)
                         disparoFallados++
                         document.getElementById('disparosFallados').textContent = `Disparos Fallados ` + disparoFallados
-                        fetch(`https:/172.0.0.1:8000/shot/${idPartida}/${filas}/${columnas}/${nombre}`)
+                        fetch(`http://127.0.0.1:8000/shot/${idPartida}/${filas}/${columnas}`)
                             .then(response => response.json())
                             .then(data => {
                                 console.log("Listado", data);
