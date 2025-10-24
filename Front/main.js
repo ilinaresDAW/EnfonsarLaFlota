@@ -80,14 +80,14 @@ boton.addEventListener('click', async (event) => {
         for (let i = 0; i < dimX; i++) {
             for (let j = 0; j < dimY; j++) {
                 document.getElementById(i + '' + j).addEventListener('click', async (event) => {
-                    if (event.target.classList.contains(`tocado` || `agua` || `hundido`)) {
+                    if (event.target.classList.contains(`tocado`)|| event.target.classList.contains(`agua`)|| event.target.classList.contains(`hundido`)) {
                         return
-                    }  //if para si la casilla ya tiene la clase tocado no pueda volver a hacer click !!cambiar porque si es agua se podria clickar mas!!
+                    }  //if para si la casilla ya tiene la clase no pueda volver a hacer click 
                     event.target.innerHTML = `-`
                     event.target.classList.add(`agua`)
                     disparoFallados++
                     document.getElementById('disparosFallados').textContent = `Disparos Fallados ` + disparoFallados
-                    fetch(`http://127.0.0.1:8000/shot/${idPartida}/${filas}/${columnas}`)
+                    fetch(`http://127.0.0.1:8000/shot/${idPartida}/${i}/${j}`)
                         .then(response => response.json())
                         .then(data => {
                             console.log("Listado", data);
