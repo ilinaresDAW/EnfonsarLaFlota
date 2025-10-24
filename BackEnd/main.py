@@ -27,7 +27,7 @@ def crear_juego(game_id: str, PoX: int, PoY: int):
     if isinstance(resultado, str):  # Si da error enseña el mensaje
         return {"error": resultado}
     else:  # Si funciona, genera barcos automáticamente
-        mi_taulell.generar_barcos_automaticos()
+        mi_taulell.generar_barcos_auto()
         return {
             "game_id": game_id,
             "matrix": resultado,
