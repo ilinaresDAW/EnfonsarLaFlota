@@ -42,6 +42,8 @@ boton.addEventListener('click', async (event) => {
             celdas += "<tr>"
             for (let j = 0; j < dimY; j++) {
                 celdas += "<td  id=" + i + j + ">*</td>"
+                //event.target.classList.add(`casilla`);
+
             }
             celdas += "</tr>"
         }
@@ -81,48 +83,44 @@ boton.addEventListener('click', async (event) => {
 
         for (let i = 0; i < dimX; i++) {
             for (let j = 0; j < dimY; j++) {
-                document.getElementById(i + '' + j).addEventListener('click', async (event) => {
-                    if (event.target.classList.contains(`tocado`) || event.target.classList.contains(`agua`) || event.target.classList.contains(`hundido`)) {
-                        return
-                    }  //if para si la casilla ya tiene la clase no pueda volver a hacer click 
-
-                    document.getElementById('disparosFallados').textContent = `Disparos Fallados ` + disparoFallados
-                    fetch(`http://127.0.0.1:8000/shot/${idPartida}/${i}/${j}`)
+                document.getElementById(i + '' + j).addEventListener('click', async (event) => {  // <-- Asegúrate de async aquí
+                    let fila = i;  // <-- Captura fila/col para closure
+                    let col = j;
+                    if (event.target.classList.contains('tocado') || event.target.classList.contains('agua') || event.target.classList.contains('hundido')) {  // <-- Mejora: Comprueba todas las clases
+                        return;
+                    }
+                    // Fetch (envía fila/col, no mides)
+                    fetch(`http://127.0.0.1:8000/shot/${idPartida}/${fila}/${col}`)
                         .then(response => response.json())
                         .then(data => {
                             console.log("Listado", data);
-                            if (data.resultado === `agua`) {
-                                event.target.classList.add(`agua`)
-                                event.target.innerHTML = `-`
-                                disparoFallados++
-                                document.getElementById(`disparosFallados`).textContent = `Disparos Fallados ` + disparoFallados
-
-                            } else if (data.resultado === `tocado`) {
-                                event.target.innerHTML = `1`
-                                event.target.classList.add(`tocado`)
-                                disparos++
-                                document.getElementById(`disparos`).textContent = "Disparos " + disparos
-
-                            } else if (data.resultado === `hundido`) {
-                                event.target.classList.add(`hundido`)
-                                event.target.innerHTML = `!`
-                                hundidos++
-                                document.getElementById(`hundido`)
+                            let resultado = data["resultado del disparo"].resultado;
+                            let puntosGanados = data["resultado del disparo"].puntos_ganados;
+                            let totalPuntos = data["resultado del disparo"].total_puntos;
+                            if (resultado === `agua`) {
+                                event.target.classList.add(`agua`);
+                                event.target.innerHTML = `-`;
+                                disparoFallados++;
+                                document.getElementById(`disparosFallados`).textContent = `Disparos Fallados ` + disparoFallados;
+                            } else if (resultado === `tocado`) {
+                                event.target.innerHTML = `1`;
+                                event.target.classList.add(`tocado`);
+                                disparos++;  // Suma si tocado
+                                document.getElementById(`disparos`).textContent = "Disparos " + disparos;
+                            } else if (resultado === `hundido`) {
+                                event.target.classList.add(`hundido`);
+                                event.target.innerHTML = `!`;
+                                hundidos++;
 
                             }
-                            puntos = data.puntos
-                            document.getElementById(`puntos`).textContent = `Puntos: ` + puntos
+                            document.getElementById(`puntos`).textContent = `Puntos: ` + puntos;
                         })
                         .catch(error => {
                             console.error("Error al enviar datos:", error);
                         });
 
-
-
-
-                    console.log('Click en ' + i + '' + j)
-
-                })
+                    console.log('Click en ' + fila + '' + col);
+                });
             }
         }
 

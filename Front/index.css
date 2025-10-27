@@ -15,12 +15,16 @@ h1 {
     font-size: 30px;
 }
 
-#tabla {
-    background-color: rgb(132, 132, 241);
-    width: 500px;
 
-}
-
+/*
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  grid-template-rows: repeat(10, 40px);
+  gap: 7px;
+  margin: 1%;
+  border: 1px;
+  border-color: black;
+  */
 .titulo {
     background-color: aqua;
     text-align: center;
@@ -51,15 +55,41 @@ h1 {
     max-width: 300px;
 }
 
-tr {
-    background-color: rgb(126, 192, 192);
-    cursor: pointer;
-    width: 500px;
-    height: 50px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 7px;
+    background-color: rgb(132, 132, 241);
+    height: 100%;
+}
+
+#tabla {
     border: 1px solid black;
 }
 
+#tabla td {
+    height: 40px;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+  
+}
 
+/* Si quieres responsive (tabla ancha en desktop, estrecha en móvil) 
+@media (max-width: 600px) {
+    table {
+        width: 100%;
+         Full ancho en móvil 
+    }
+
+    #tabla td {
+        width: calc(100% / 7);
+         Mantiene proporción 
+        font-size: 12px;
+        Texto más pequeño 
+    }
+}
+*/
 .medidas {
     display: flex;
     margin: 10%;
@@ -120,13 +150,13 @@ tr {
 
 .bloc2 {
     background-color: rgb(81, 255, 0);
-    width: 32%;
-    margin-left: 50px;
+    width: 100%;
+    margin-left: 5%;
 
 }
 
 .bloc3 {
-    margin-left: 300px;
+    margin-left: 5%;
     background-color: aqua;
     width: 300px;
 }
