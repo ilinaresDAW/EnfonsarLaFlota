@@ -42,7 +42,7 @@ def crear_juego(game_id: str, PoX: int, PoY: int):
         "size": {"rows": PoX, "cols": PoY}
     }
 
-@app.get("/createShipSmall/{game_id}")
+"""@app.get("/createShipSmall/{game_id}")
 def crear_barcoS(game_id: str):
     if game_id not in juegos:
         return {"error": "Juego no encontrado"}
@@ -70,7 +70,7 @@ def crear_barcoB(game_id: str, medida: int):
         "game_id": game_id,
         "barco": resultado,
         "status": "created successfully"
-    }
+    }"""
 
 @app.get("/shot/{game_id}/{PoX}/{PoY}")
 def crear_disparo(game_id: str, PoX: int, PoY: int):
@@ -85,6 +85,14 @@ def crear_disparo(game_id: str, PoX: int, PoY: int):
         "game_id": game_id,
         "resultado del disparo": resultado,
         "status": "created successfully"
+    }
+
+@app.get("/abandonar/{game_id}")
+def abandonar(game_id: str):
+    mi_taulell = b.taulell()
+    resultado = mi_taulell.cleanPartida()
+    return{
+        "Partida eliminada"
     }
 
 @app.get("/game/{game_id}/")

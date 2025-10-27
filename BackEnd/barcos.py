@@ -35,6 +35,14 @@ class taulell:
             self.puntuacion = 1000  
             return self.tabla
     
+    def cleanPartida(self):
+        self.Filas = 0
+        self.Columnas = 0
+        self.tabla = []
+        self.lista_barcos = []
+        self.puntuacion = 1000
+        self.historial_disparos = []
+    
     def generar_barcos_auto(self):
         totalMatriz = self.Filas * self.Columnas
         maxTamaño = int(totalMatriz * 0.33)  # Max 33% de las celdas
