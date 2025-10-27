@@ -89,11 +89,18 @@ def crear_disparo(game_id: str, PoX: int, PoY: int):
 
 @app.get("/abandonar/{game_id}")
 def abandonar(game_id: str):
-    mi_taulell = b.taulell()
-    resultado = mi_taulell.cleanPartida()
-    return{
-        "Partida eliminada"
+    if game_id not in juegos:
+        return {"error": "Juego no encontrado"}
+    mi_taulell = juegos[game_id]
+    mi_taulell.cleanPartida() 
+    del juegos[game_id]  
+    return {
+        "game_id": game_id,
+        "message": "Partida eliminada correctamente",
+        "status": "yets"
     }
+
+
 
 @app.get("/game/{game_id}/")
 def juego(game_id: str):

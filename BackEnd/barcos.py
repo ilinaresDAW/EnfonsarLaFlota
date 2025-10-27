@@ -11,6 +11,8 @@ class taulell:
         self.lista_barcos = []
         self.puntuacion = 1000
         self.historial_disparos = []
+        self.barcosHundidos = 0
+        self.casillasMarcadas = 0
 
     # Añadir barcos desde la clase barcos
     def añadirlistabarco (self, barcos):
@@ -42,6 +44,7 @@ class taulell:
         self.lista_barcos = []
         self.puntuacion = 1000
         self.historial_disparos = []
+
     
     def generar_barcos_auto(self):
         totalMatriz = self.Filas * self.Columnas
@@ -51,6 +54,7 @@ class taulell:
         max_intentos = 1000  #Creo esta variable de intentos para q no este siemple en un constante bucle y no se pete, es decir, un limite
         intentos = 0
 
+        barco1.minimos_barcos()#Creo los barcos minimos para la martiz
         while celdasOcupadas < maxTamaño and intentos < max_intentos:
             tamaño = rd.choice(tamañoDisponible)  # Seleccionar tamaño aleatorio
             if celdasOcupadas + tamaño > maxTamaño:
@@ -68,6 +72,8 @@ class taulell:
             intentos = 0  # Resetear intentos tras éxito
         if intentos >= max_intentos:
             print("Deja de funcionar por bucle infinito MAX INTNETOS")
+    
+    
     
     # Verificar si ya hay algún barco con esas coordenadas
     def cords_ocupadas(self):
@@ -112,7 +118,10 @@ class taulell:
                 self.puntuacion += 20
             elif resultado == "hundido":
                 self.puntuacion += 50 
-            
+                self.barcosHundidos += 1
+
+    def registrar_casilla(Self):
+        Self.casillasMarcadas += 1
 
 
 # Clase barocs
@@ -148,6 +157,15 @@ class barcos:
                 coords.append((PoX, PoY - i))
         return coords
     
+    def minimos_barcos(self):
+        medidas = [1, 2, 3, 4, 5]
+        for tamaño in medidas:
+            barco = barcos(tamaño, self)
+            if tamaño == 1:
+                barco.crear_barcoPequeño()
+            else:
+                barco.crear_barcoGrande(tamaño)
+    
     # creo barco pequeño usando funcionas ya creadas para ayudarme
     def crear_barcoPequeño(self):
         salir = True
@@ -180,7 +198,6 @@ class barcos:
                     self.comprobar_direccion(PoX, PoY, "Y1", tamaño),
                     self.comprobar_direccion(PoX, PoY, "Y2", tamaño)
                 ]
-                #Explicar este for = Pendiente
                 for coords in direcciones:
                     if len(coords) == tamaño:
                         ocupado = self.taulell.cords_ocupadas() 
@@ -201,10 +218,12 @@ class barcos:
                 if(PoX, PoY) in barco.cords:
                     barco_tocado = barco
                     break
+            taulell.registrar_casilla()
             if barco_tocado == None:
                 resultado = "agua"
-                self.taulell.registrar_disparo(resultado, PoX, PoY)
+                taulell.registrar_disparo(resultado, PoX, PoY)
                 return {
+                    "valor": "agua",
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
                     "puntos": -10,
@@ -213,8 +232,9 @@ class barcos:
             barco_tocado.cords.remove((PoX, PoY))
             if len(barco_tocado.cords) == 0:  
                 resultado = "hundido"
-                self.taulell.registrar_disparo(resultado, PoX, PoY)  
+                taulell.registrar_disparo(resultado, PoX, PoY)  
                 return{
+                    "valor": "barco",
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
                     "puntos": +50,
@@ -222,7 +242,7 @@ class barcos:
                 } 
             else:
                 resultado = "tocado"
-                self.taulell.registrar_disparo(resultado, PoX, PoY)
+                taulell.registrar_disparo(resultado, PoX, PoY)
                 return {
                     "resultado": "tocado",
                     "coordenadas": (PoX, PoY),
