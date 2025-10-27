@@ -10,9 +10,9 @@
 
 <body>
     <header>
-         <h1 class="titulo">Enfosar la flota</h1>
+        <h1 class="titulo">Enfosar la flota</h1>
     </header>
-   
+
     <hr>
     <div class="pagina">
         <div id="bloc1" class="bloc1">
@@ -22,21 +22,33 @@
                     <label for="filas">Amplada 7-20</label></br><input type="number" id="filas" min="7" max="20"><br>
                 </div>
                 <div class="columnas">
-                    <label for="columnas">Alçada 7-20 </label><br><input type="number" id="columnas" min="7" max="20"><br>
+                    <label for="columnas">Alçada 7-20 </label><br><input type="number" id="columnas" min="7"
+                        max="20"><br>
                 </div>
             </div>
             <label for="nombre">Nombre de usuario </label><input type="text" id="nombre"><br>
             <button id="datos">Enviar datos</button>
             <!--<input type="button" value="Genera una tabla" onclick="genera_tabla()" />-->
             <div class="difcultad" id="dificultad">Dificultad</div>
+            <button id="reiniciar">Reiniciar</button>
+            <button id="abandonar"> Abandonar</button>
+
+
 
         </div>
         <div id="bloc2" class="bloc2">
-            <table>
-                <tbody id="tabla">
+            <div class="tablero">
+                <h1>Tablero</h1>
+                <table>
+                    <tbody id="tabla">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
+            <div class="botonDisparo">
+                <button id="disparar">Disparar</button>
+            </div>
+
         </div>
         <div id="bloc3" class="bloc3">
             <p class="jugador" id="jugador">Jugador: </p>

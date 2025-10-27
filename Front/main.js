@@ -37,12 +37,11 @@ boton.addEventListener('click', async (event) => {
 
         //Generacion de la tabla
         let celdas = ""
-        let dimX = filas, dimY = columnas //Dimensiones de la tabla
+        let dimX = filas, dimY = columnas
         for (let i = 0; i < dimX; i++) {
             celdas += "<tr>"
             for (let j = 0; j < dimY; j++) {
                 celdas += "<td  id=" + i + j + ">*</td>"
-                //event.target.classList.add(`casilla`);
 
             }
             celdas += "</tr>"
@@ -83,46 +82,48 @@ boton.addEventListener('click', async (event) => {
 
         for (let i = 0; i < dimX; i++) {
             for (let j = 0; j < dimY; j++) {
-                document.getElementById(i + '' + j).addEventListener('click', async (event) => {  // <-- Asegúrate de async aquí
-                    let fila = i;  // <-- Captura fila/col para closure
+                document.getElementById(i + '' + j).addEventListener('click', async (event) => {
+                    let fila = i;
                     let col = j;
                     if (event.target.classList.contains('tocado') || event.target.classList.contains('agua') || event.target.classList.contains('hundido')) {  // <-- Mejora: Comprueba todas las clases
                         return;
+                    } else {
+
+                        fetch(`http://127.0.0.1:8000/shot/${idPartida}/${fila}/${col}`)
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log("Listado", data);
+                                let resultado = data["resultado del disparo"].resultado;
+                                let puntosGanados = data["resultado del disparo"].puntos_ganados;
+                                let totalPuntos = data["resultado del disparo"].total_puntos;
+                                if (resultado === `agua`) {
+                                    event.target.classList.add(`agua`);
+                                    event.target.innerHTML = `·`;
+                                    disparoFallados++;
+                                    document.getElementById(`disparosFallados`).textContent = `Disparos Fallados ` + disparoFallados;
+                                } else if (resultado === `tocado`) {
+                                    event.target.innerHTML = `|`;
+                                    event.target.classList.add(`tocado`);
+                                    disparos++;  // Suma si tocado
+                                    document.getElementById(`disparos`).textContent = "Disparos " + disparos;
+                                } else if (resultado === `hundido`) {
+                                    event.target.classList.add(`hundido`);
+                                    event.target.innerHTML = `T`;
+                                    hundidos++;
+
+                                }
+                                document.getElementById(`puntos`).textContent = `Puntos: ` + puntos;
+                            })
+                            .catch(error => {
+                                console.error("Error al enviar datos:", error);
+                            });
+
+                        console.log('Click en ' + fila + 'y' + col);
                     }
-                    // Fetch (envía fila/col, no mides)
-                    fetch(`http://127.0.0.1:8000/shot/${idPartida}/${fila}/${col}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            console.log("Listado", data);
-                            let resultado = data["resultado del disparo"].resultado;
-                            let puntosGanados = data["resultado del disparo"].puntos_ganados;
-                            let totalPuntos = data["resultado del disparo"].total_puntos;
-                            if (resultado === `agua`) {
-                                event.target.classList.add(`agua`);
-                                event.target.innerHTML = `-`;
-                                disparoFallados++;
-                                document.getElementById(`disparosFallados`).textContent = `Disparos Fallados ` + disparoFallados;
-                            } else if (resultado === `tocado`) {
-                                event.target.innerHTML = `1`;
-                                event.target.classList.add(`tocado`);
-                                disparos++;  // Suma si tocado
-                                document.getElementById(`disparos`).textContent = "Disparos " + disparos;
-                            } else if (resultado === `hundido`) {
-                                event.target.classList.add(`hundido`);
-                                event.target.innerHTML = `!`;
-                                hundidos++;
-
-                            }
-                            document.getElementById(`puntos`).textContent = `Puntos: ` + puntos;
-                        })
-                        .catch(error => {
-                            console.error("Error al enviar datos:", error);
-                        });
-
-                    console.log('Click en ' + fila + '' + col);
                 });
             }
         }
+
 
     }
 })
