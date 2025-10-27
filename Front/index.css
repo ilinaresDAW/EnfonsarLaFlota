@@ -43,56 +43,25 @@ h1 {
 
 .hundido {
     background-color: black;
+    color: white;
 }
 
 .bloc1 {
     border-radius: 20px;
-    padding: 3px;
     border: 1px solid rgb(112, 108, 108);
-    padding: 30px;
-    border-radius: 10px;
+    padding: 3%;
     text-align: center;
-    max-width: 300px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 7px;
-    background-color: rgb(132, 132, 241);
+    width: 33%;
+    justify-content: center;
     height: 100%;
 }
 
-#tabla {
-    border: 1px solid black;
-}
 
-#tabla td {
-    height: 40px;
-    border: 1px solid black;
-    text-align: center;
-    cursor: pointer;
-  
-}
 
-/* Si quieres responsive (tabla ancha en desktop, estrecha en móvil) 
-@media (max-width: 600px) {
-    table {
-        width: 100%;
-         Full ancho en móvil 
-    }
-
-    #tabla td {
-        width: calc(100% / 7);
-         Mantiene proporción 
-        font-size: 12px;
-        Texto más pequeño 
-    }
-}
-*/
 .medidas {
     display: flex;
-    margin: 10%;
+    margin: 5%;
+    margin-bottom: 7%;
 }
 
 .filas {
@@ -126,9 +95,32 @@ table {
     color: white;
     border: none;
     border-radius: 8px;
-    padding: 12px 80px;
+    padding: 5% 35%;
     font-weight: bold;
     cursor: pointer;
+}
+
+#reiniciar {
+    margin-top: 6%;
+    border-radius: 10px;
+    padding: 6% 35%;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid rgb(112, 108, 108);
+}
+
+#abandonar {
+    text-align: center;
+    margin-top: 6%;
+    border-radius: 10px;
+    padding: 6% 32%;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: white;
+    border: none;
+    background-color: rgb(226, 37, 37);
+    color: white;
 }
 
 .difcultad {
@@ -149,9 +141,55 @@ table {
 }
 
 .bloc2 {
-    background-color: rgb(81, 255, 0);
+    border-radius: 20px;
+    width: 66%;
+    height: 100%;
+    margin-left: 2%
+}
+
+.tablero {
+    border-radius: 20px;
+    border: 1px solid rgb(112, 108, 108);
+    padding: 3%;
+    margin: 0;
+}
+
+table {
     width: 100%;
-    margin-left: 5%;
+    border-collapse: collapse;
+    border-spacing: 7px;
+    background-color: rgb(221, 221, 235);
+    height: 100%;
+}
+
+#tabla {
+    border: 1px solid black;
+}
+
+#tabla td {
+    height: 40px;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.botonDisparo {
+    border-radius: 20px;
+    border: 1px solid rgb(112, 108, 108);
+    padding: 6% 3%;
+    margin-top: 4%;
+    text-align: center;
+}
+
+#disparar {
+    background-color: #5b0ff4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 3% 35%;
+    font-weight: bold;
+    cursor: pointer;
 
 }
 
