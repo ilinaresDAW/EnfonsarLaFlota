@@ -54,7 +54,7 @@ class taulell:
         max_intentos = 1000  #Creo esta variable de intentos para q no este siemple en un constante bucle y no se pete, es decir, un limite
         intentos = 0
 
-        barco1.minimos_barcos()#Creo los barcos minimos para la martiz
+        self.minimos_barcos()#Creo los barcos minimos para la martiz
         while celdasOcupadas < maxTamaño and intentos < max_intentos:
             tamaño = rd.choice(tamañoDisponible)  # Seleccionar tamaño aleatorio
             if celdasOcupadas + tamaño > maxTamaño:
@@ -160,7 +160,7 @@ class barcos:
     def minimos_barcos(self):
         medidas = [1, 2, 3, 4, 5]
         for tamaño in medidas:
-            barco = barcos(tamaño, self)
+            barco = barcos(tamaño, self.taulell)
             if tamaño == 1:
                 barco.crear_barcoPequeño()
             else:
@@ -218,10 +218,10 @@ class barcos:
                 if(PoX, PoY) in barco.cords:
                     barco_tocado = barco
                     break
-            taulell.registrar_casilla()
+            self.taulell.registrar_casilla()
             if barco_tocado == None:
                 resultado = "agua"
-                taulell.registrar_disparo(resultado, PoX, PoY)
+                self.taulell.registrar_disparo(resultado, PoX, PoY)
                 return {
                     "valor": "agua",
                     "resultado": resultado,
@@ -232,7 +232,7 @@ class barcos:
             barco_tocado.cords.remove((PoX, PoY))
             if len(barco_tocado.cords) == 0:  
                 resultado = "hundido"
-                taulell.registrar_disparo(resultado, PoX, PoY)  
+                self.taulell.registrar_disparo(resultado, PoX, PoY)  
                 return{
                     "valor": "barco",
                     "resultado": resultado,
@@ -242,7 +242,7 @@ class barcos:
                 } 
             else:
                 resultado = "tocado"
-                taulell.registrar_disparo(resultado, PoX, PoY)
+                self.taulell.registrar_disparo(resultado, PoX, PoY)
                 return {
                     "resultado": "tocado",
                     "coordenadas": (PoX, PoY),
