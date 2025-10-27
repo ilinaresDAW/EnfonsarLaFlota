@@ -30,6 +30,9 @@ class taulell:
                     fila.append("X")
                 matriz.append(fila)
             self.tabla = matriz
+            self.lista_barcos = []      
+            self.historial_disparos = []  
+            self.puntuacion = 1000  
             return self.tabla
     
     def generar_barcos_auto(self):
