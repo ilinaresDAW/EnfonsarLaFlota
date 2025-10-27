@@ -47,15 +47,21 @@ class taulell:
 
     
     def generar_barcos_auto(self):
+        if not self.tabla:
+            return "Matriz no creada"
+        
         totalMatriz = self.Filas * self.Columnas
         maxTamaño = int(totalMatriz * 0.33)  # Max 33% de las celdas
         celdasOcupadas = 0
         tamañoDisponible = [1, 2, 3, 4, 5]  
         max_intentos = 1000  #Creo esta variable de intentos para q no este siemple en un constante bucle y no se pete, es decir, un limite
         intentos = 0
-
-        self.minimos_barcos()#Creo los barcos minimos para la martiz
+        unaVez = 0
+        
         while celdasOcupadas < maxTamaño and intentos < max_intentos:
+            if unaVez == 0:
+                self.barcos.minimos_barcos()#Creo los barcos minimos para la martiz
+                unaVez += 1
             tamaño = rd.choice(tamañoDisponible)  # Seleccionar tamaño aleatorio
             if celdasOcupadas + tamaño > maxTamaño:
                 intentos += 1
@@ -124,7 +130,7 @@ class taulell:
         Self.casillasMarcadas += 1
 
 
-# Clase barocs
+# Clase barcos
 
 class barcos:
     def __init__(self, tamaño, taulell = None  ):#pongo taulell q es none ya q si creo barco no podria acceder a los datos del taulell
@@ -159,12 +165,12 @@ class barcos:
     
     def minimos_barcos(self):
         medidas = [1, 2, 3, 4, 5]
-        for tamaño in medidas:
-            barco = barcos(tamaño, self.taulell)
-            if tamaño == 1:
+        for m in medidas:
+            barco = barcos(m, self.taulell)
+            if m == 1:
                 barco.crear_barcoPequeño()
             else:
-                barco.crear_barcoGrande(tamaño)
+                barco.crear_barcoGrande(m)
     
     # creo barco pequeño usando funcionas ya creadas para ayudarme
     def crear_barcoPequeño(self):
