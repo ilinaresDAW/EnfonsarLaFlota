@@ -49,19 +49,18 @@ class taulell:
     def generar_barcos_auto(self):
         if not self.tabla:
             return "Matriz no creada"
-        
+        self.crear_barcosMinimos()
+
         totalMatriz = self.Filas * self.Columnas
         maxTamaño = int(totalMatriz * 0.33)  # Max 33% de las celdas
         celdasOcupadas = 0
         tamañoDisponible = [1, 2, 3, 4, 5]  
         max_intentos = 1000  #Creo esta variable de intentos para q no este siemple en un constante bucle y no se pete, es decir, un limite
         intentos = 0
-        unaVez = 0
+        
         
         while celdasOcupadas < maxTamaño and intentos < max_intentos:
-            if unaVez == 0:
-                self.barcos.minimos_barcos()#Creo los barcos minimos para la martiz
-                unaVez += 1
+            
             tamaño = rd.choice(tamañoDisponible)  # Seleccionar tamaño aleatorio
             if celdasOcupadas + tamaño > maxTamaño:
                 intentos += 1
@@ -128,6 +127,28 @@ class taulell:
 
     def registrar_casilla(Self):
         Self.casillasMarcadas += 1
+    
+    def crear_barcosMinimos(self):
+        if not self.tabla: #es para omprobar q este creada y no se cree x crear sin guardar en ningun sitio aleatorio
+            return "Matriz no creada"
+        
+        tamaños = [1, 2, 3, 4, 5]
+        max_intentos = 1000
+        
+        for mida in tamaños:
+            intents = 0
+            colocat = False
+            while not colocat and intents < max_intentos:
+                barco = barcos(mida, self)
+                if mida == 1:
+                    resultat = barco.crear_barcoPequeño()
+                else:
+                    resultat = barco.crear_barcoGrande(mida)
+                if not isinstance(resultat, str):  # Si se a creado correactamente, es decir, si resultado es guardado como string es incorrecto, ya q es el error, es caso q no ponga if NOT significa q guardo el error y vuelve a probar
+                    colocat = True
+                intents += 1
+            if not colocat:
+                print("Maximo de intentos, intenta de nuevo")
 
 
 # Clase barcos
@@ -163,14 +184,7 @@ class barcos:
                 coords.append((PoX, PoY - i))
         return coords
     
-    def minimos_barcos(self):
-        medidas = [1, 2, 3, 4, 5]
-        for m in medidas:
-            barco = barcos(m, self.taulell)
-            if m == 1:
-                barco.crear_barcoPequeño()
-            else:
-                barco.crear_barcoGrande(m)
+    
     
     # creo barco pequeño usando funcionas ya creadas para ayudarme
     def crear_barcoPequeño(self):
@@ -204,6 +218,7 @@ class barcos:
                     self.comprobar_direccion(PoX, PoY, "Y1", tamaño),
                     self.comprobar_direccion(PoX, PoY, "Y2", tamaño)
                 ]
+                rd.shuffle(direcciones)
                 for coords in direcciones:
                     if len(coords) == tamaño:
                         ocupado = self.taulell.cords_ocupadas() 
