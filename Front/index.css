@@ -15,16 +15,6 @@ h1 {
     font-size: 30px;
 }
 
-
-/*
-  display: grid;
-  grid-template-columns: repeat(10, 40px);
-  grid-template-rows: repeat(10, 40px);
-  gap: 7px;
-  margin: 1%;
-  border: 1px;
-  border-color: black;
-  */
 .titulo {
     background-color: aqua;
     text-align: center;
@@ -91,7 +81,7 @@ h1 {
 
 #datos {
     margin: 5%;
-    background-color: #5b0ff4;
+    background-color: #636AE8;
     color: white;
     border: none;
     border-radius: 8px;
@@ -141,10 +131,12 @@ h1 {
 }
 
 .bloc2 {
+    /*display: none;*/
     border-radius: 20px;
     width: 66%;
     height: 100%;
-    margin-left: 2%
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .tablero {
@@ -174,6 +166,10 @@ table {
 
 }
 
+#tabla td:hover {
+    background-color: beige;
+}
+
 .botonDisparo {
     border-radius: 20px;
     border: 1px solid rgb(112, 108, 108);
@@ -183,7 +179,7 @@ table {
 }
 
 #disparar {
-    background-color: #5b0ff4;
+    background-color: #636AE8;
     color: white;
     border: none;
     border-radius: 8px;
@@ -193,8 +189,40 @@ table {
 
 }
 
-.bloc3 {
-    margin-left: 5%;
-    background-color: aqua;
-    width: 300px;
+
+#bloc3 {
+    /*display: none;*/
+    border-radius: 20px;
+    border: 1px solid rgb(112, 108, 108);
+    padding: 3%;
+    width: 33%;
+    justify-content: center;
+    height: 100%;
+}
+
+#puntos {
+    color: #636AE8;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.disparos {
+    display: flex;
+}
+.disparosAcertados{
+    margin-right: 4%;
+}
+.disparosAcertados,
+.disparosFallados,
+.barcosHundidos {
+    padding: 8px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #555;
+    width: 45%;
+}
+
+#ultimaJugada{
+    color: gray;
 }

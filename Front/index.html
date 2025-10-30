@@ -51,12 +51,31 @@
 
         </div>
         <div id="bloc3" class="bloc3">
-            <p class="jugador" id="jugador">Jugador: </p>
-            <p class="disparos" id="disparos">Disparos: 0</p>
-            <p class="disparosFallados" id="disparosFallados">Disparos fallados: 0</p>
-            <p class="barcosHundidos" id="barcosHundidos">Barcos Hundidos: 0</p>
-            <p class="puntosPartida" id="puntos">Puntos: 0</p>
+            <div class="marcador">
+                <h2>Marcador</h2>
+                <p id="puntos">1000 Punts</p>
+            </div>
+            <div class="estats">
+                <H2>Estadisticas</H2>
+                <p class="jugador" id="jugador">Jugador: </p>
+                <div class="estats2">
+                    <h2>Estats del Jugador</h2>
+                    <div class="disparos">
+                        <p class="disparosAcertados" id="disparos">Disparos Acertados: 0</p>
+                        <p class="disparosFallados" id="disparosFallados">Disparos fallados: 0</p>
+                    </div>
+                    <p class="barcosHundidos" id="barcosHundidos">Barcos Hundidos: 0</p>
+                    <div class="jugadas">
+                        <h2>Numero de jugadas</h2>
+                        <p id="totalDisparos">Disparos: </p>
+                    </div>
+                </div>
+            </div>
+            <div id="ultimaJugada">
+                <p>Últim missatge: </p>
+            </div>
         </div>
+
     </div>
     <script src="main.js"></script>
 </body>

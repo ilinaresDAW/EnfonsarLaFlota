@@ -20,8 +20,6 @@ boton.addEventListener('click', async (event) => {
     let nombre = document.getElementById('nombre').value
     console.log("nombre " + nombre + " filas " + filas + " columnas " + columnas)
     //Recogida de datos nombre fila y columna
-
-
     if (columnas > 20 || columnas < 7 || filas > 20 || filas < 7) {//If por si introduce valores superiores a los permitidos
         alert("Numero de filas o columnas invalido recuerda introducir del 7 a 20")
     } else {
@@ -34,7 +32,6 @@ boton.addEventListener('click', async (event) => {
                 console.error("Error al enviar datos:", error);
             });
         document.getElementById(`jugador`).textContent = `Jugador: ` + nombre
-
         //Generacion de la tabla
         let celdas = ""
         let dimX = filas, dimY = columnas
@@ -42,7 +39,6 @@ boton.addEventListener('click', async (event) => {
             celdas += "<tr>"
             for (let j = 0; j < dimY; j++) {
                 celdas += "<td  id=" + i + j + ">*</td>"
-
             }
             celdas += "</tr>"
         }
@@ -78,8 +74,10 @@ boton.addEventListener('click', async (event) => {
             document.getElementById(`dificultad`).textContent = `Dificil`
 
         }
-        //Mecanica de disparo
+        document.getElementById('bloc2').style.display = 'block'
+        document.getElementById('bloc3').style.display = 'block'
 
+        //Mecanica de disparo
         for (let i = 0; i < dimX; i++) {
             for (let j = 0; j < dimY; j++) {
                 document.getElementById(i + '' + j).addEventListener('click', async (event) => {
@@ -92,27 +90,36 @@ boton.addEventListener('click', async (event) => {
                         fetch(`http://127.0.0.1:8000/shot/${idPartida}/${fila}/${col}`)
                             .then(response => response.json())
                             .then(data => {
-                                console.log("Listado", data);
-                                let resultado = data["resultado del disparo"].resultado;
-                                let puntosGanados = data["resultado del disparo"].puntos_ganados;
-                                let totalPuntos = data["resultado del disparo"].total_puntos;
+                                console.log("Listado", data)
+                                let resultado = data["resultado del disparo"].resultado
+                                //let puntosGanados = data["resultado del disparo"].puntos_ganados
+                                let totalPuntos = data["resultado del disparo"].total_puntos
+                                let estado =data["resultado del disparo"].estado
+                                document.getElementById(`puntos`).textContent = `Puntos: ` + totalPuntos
                                 if (resultado === `agua`) {
-                                    event.target.classList.add(`agua`);
-                                    event.target.innerHTML = `·`;
-                                    disparoFallados++;
-                                    document.getElementById(`disparosFallados`).textContent = `Disparos Fallados ` + disparoFallados;
+                                    event.target.classList.add(`agua`)
+                                    event.target.innerHTML = `·`
+                                    disparoFallados++
+                                    document.getElementById(`disparosFallados`).textContent = `Disparos Fallados: ` + disparoFallados
+                                    document.getElementById(`ultimaJugada`).textContent = "Últim mssatge: " + nombre + " ha tocat " + resultado + " en " + i + " " + j
                                 } else if (resultado === `tocado`) {
-                                    event.target.innerHTML = `|`;
-                                    event.target.classList.add(`tocado`);
-                                    disparos++;  // Suma si tocado
-                                    document.getElementById(`disparos`).textContent = "Disparos " + disparos;
+                                    event.target.innerHTML = `|`
+                                    event.target.classList.add(`tocado`)
+                                    disparos++  // Suma si tocado
+                                    document.getElementById(`disparos`).textContent = "Disparos Acertados: " + disparos
+                                    document.getElementById(`ultimaJugada`).textContent = "Últim mssatge: " + nombre + " ha tocat vaixell en " + i + " " + j
                                 } else if (resultado === `hundido`) {
-                                    event.target.classList.add(`hundido`);
-                                    event.target.innerHTML = `T`;
-                                    hundidos++;
+                                    event.target.classList.add(`hundido`)
+                                    event.target.innerHTML = `T`
+                                    hundidos++
+                                    document.getElementById(`barcosHundidos`).textContent = "Barcos hundidos: " + hundidos
+                                    document.getElementById(`ultimaJugada`).textContent = "Últim mssatge: " + nombre + " ha enfonsat vaixell en " + i + " " + j
 
                                 }
-                                document.getElementById(`puntos`).textContent = `Puntos: ` + puntos;
+                                let totalDisparos = disparos + disparoFallados
+                                document.getElementById(`totalDisparos`).textContent = "Disparos " + totalDisparos
+
+
                             })
                             .catch(error => {
                                 console.error("Error al enviar datos:", error);
