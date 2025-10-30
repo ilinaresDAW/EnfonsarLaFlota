@@ -277,7 +277,7 @@ class barcos:
                 resultado = "hundido"
                 self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)  
-                if not self.taulell.comprobarBarcos():
+                if self.taulell.comprobarBarcos():
                     return{
                         "valor": "barco",
                         "resultado": resultado,
