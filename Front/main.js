@@ -94,7 +94,7 @@ boton.addEventListener('click', async (event) => {
                                 let resultado = data["resultado del disparo"].resultado
                                 //let puntosGanados = data["resultado del disparo"].puntos_ganados
                                 let totalPuntos = data["resultado del disparo"].total_puntos
-                                let estado =data["resultado del disparo"].estado
+                                let estado = data["resultado del disparo"].estado
                                 document.getElementById(`puntos`).textContent = `Puntos: ` + totalPuntos
                                 if (resultado === `agua`) {
                                     event.target.classList.add(`agua`)
@@ -115,6 +115,11 @@ boton.addEventListener('click', async (event) => {
                                     document.getElementById(`barcosHundidos`).textContent = "Barcos hundidos: " + hundidos
                                     document.getElementById(`ultimaJugada`).textContent = "Últim mssatge: " + nombre + " ha enfonsat vaixell en " + i + " " + j
 
+                                }
+                                if (estado === 'Derrofta') {
+                                    document.getElementById("bloc2").style.display = "none"
+                                    document.getElementById("bloc3").style.display = "none"
+                                    console.log(`loser`)
                                 }
                                 let totalDisparos = disparos + disparoFallados
                                 document.getElementById(`totalDisparos`).textContent = "Disparos " + totalDisparos
