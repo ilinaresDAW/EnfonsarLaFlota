@@ -15,10 +15,23 @@ h1 {
     font-size: 30px;
 }
 
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .titulo {
-    background-color: aqua;
-    text-align: center;
-    margin: auto;
+    margin-top: 1.5%;
+    margin-bottom: 0%;
+}
+
+.titulo2 {
+    color: #636AE8;
+    margin-top: 1%;
+    margin-bottom: 0%;
+    margin-right: 0.2%;
+    font-style: italic;
 }
 
 
@@ -200,6 +213,10 @@ table {
     height: 100%;
 }
 
+.marcador {
+    display: flex;
+}
+
 #puntos {
     color: #636AE8;
     font-weight: bold;
@@ -209,9 +226,11 @@ table {
 .disparos {
     display: flex;
 }
-.disparosAcertados{
+
+.disparosAcertados {
     margin-right: 4%;
 }
+
 .disparosAcertados,
 .disparosFallados,
 .barcosHundidos {
@@ -223,6 +242,14 @@ table {
     width: 45%;
 }
 
-#ultimaJugada{
+#ultimaJugada {
     color: gray;
+    margin-top: 15%;
+}
+
+#final {
+    font-size: 100px;
+    font-weight: bold;
+    margin-left: 20%;
+    margin-left: 60%;
 }
