@@ -121,14 +121,14 @@ boton.addEventListener('click', async (event) => {
                                 }
                                 if (estado === 'Derrota') {
                                     document.getElementById("bloc2").style.display = "none"
-                                    document.getElementById("bloc3").style.display = "none"
-                                    document.getElementById("bloc3").style.color = "red"
+                                    document.getElementById("bloc1").style.display = "none"
+                                    document.getElementById("final").style.color = "red"
 
                                     console.log(`PERDEDRO`)
                                 } else if (estado === 'Victoria') {
                                     document.getElementById("bloc2").style.display = "none"
-                                    document.getElementById("bloc3").style.display = "none"
-                                    document.getElementById("bloc3").style.color = "green"
+                                    document.getElementById("bloc1").style.display = "none"
+                                    document.getElementById("final").style.color = "green"
 
                                     console.log(`GANADOR`)
                                 }
