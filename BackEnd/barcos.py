@@ -13,11 +13,19 @@ class taulell:
         self.historial_disparos = []
         self.barcosHundidos = 0
         self.casillasMarcadas = 0
+        self.casillasAgua = 0
+        self.casillasMaxAgua = 0
 
     # Añadir barcos desde la clase barcos
     def añadirlistabarco (self, barcos):
         self.lista_barcos.append(barcos)
 
+    def comprobarBarcos (self):
+        for barco in self.lista_barcos:
+            if barco.cords:  # si tiene cords es q aun hay barcos
+                return False
+        return True
+    
     # Crear la matriz y devolver mensaje si está mal
     def crear_matriz(self, filas, columnas):
         if filas < 7 or columnas < 7: 
@@ -52,7 +60,7 @@ class taulell:
         self.crear_barcosMinimos()
 
         totalMatriz = self.Filas * self.Columnas
-        maxTamaño = int(totalMatriz * 0.33)  # Max 33% de las celdas
+        maxTamaño = int(totalMatriz * 0.30)  # Max 30% de las celdas
         celdasOcupadas = 0
         tamañoDisponible = [1, 2, 3, 4, 5]  
         max_intentos = 1000  #Creo esta variable de intentos para q no este siemple en un constante bucle y no se pete, es decir, un limite
@@ -75,8 +83,10 @@ class taulell:
                 continue
             celdasOcupadas += tamaño  # Actualizar celdas ocupadas
             intentos = 0  # Resetear intentos tras éxito
-        if intentos >= max_intentos:
-            print("Deja de funcionar por bucle infinito MAX INTNETOS")
+            if intentos >= max_intentos:
+                print("Deja de funcionar por bucle infinito MAX INTNETOS")
+        celdas_libres = self.Filas * self.Columnas - celdasOcupadas
+        self.casillasMaxAgua = round(celdas_libres / 2)#redondeo par aevitar fallos
     
     
     
@@ -125,8 +135,10 @@ class taulell:
                 self.puntuacion += 50 
                 self.barcosHundidos += 1
 
-    def registrar_casilla(Self):
-        Self.casillasMarcadas += 1
+    def registrar_casilla(self, resultado):
+        self.casillasMarcadas += 1
+        if resultado == "agua":
+            self.casillasAgua += 1
     
     def crear_barcosMinimos(self):
         if not self.tabla: #es para omprobar q este creada y no se cree x crear sin guardar en ningun sitio aleatorio
@@ -239,35 +251,58 @@ class barcos:
                 if(PoX, PoY) in barco.cords:
                     barco_tocado = barco
                     break
-            self.taulell.registrar_casilla()
             if barco_tocado == None:
                 resultado = "agua"
+                self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)
+                if self.taulell.casillasMaxAgua >= self.taulell.casillasAgua:
+                    return{
+                       "valor": "agua",
+                        "resultado": resultado,
+                        "coordenadas": (PoX, PoY),
+                        "puntos": -10,
+                        "estado": "Derrota",
+                        "total_puntos": self.taulell.puntuacion 
+                    }
                 return {
                     "valor": "agua",
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
                     "puntos": -10,
+                    "estado": "En curso",
                     "total_puntos": self.taulell.puntuacion
                 }  
             barco_tocado.cords.remove((PoX, PoY))
             if len(barco_tocado.cords) == 0:  
                 resultado = "hundido"
+                self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)  
+                if not self.taulell.comprobarBarcos():
+                    return{
+                        "valor": "barco",
+                        "resultado": resultado,
+                        "coordenadas": (PoX, PoY),
+                        "puntos": +50,
+                        "estado": "Victoria",
+                        "total_puntos": self.taulell.puntuacion
+                    }
                 return{
                     "valor": "barco",
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
                     "puntos": +50,
+                    "estado": "En curso",
                     "total_puntos": self.taulell.puntuacion
                 } 
             else:
                 resultado = "tocado"
+                self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)
                 return {
                     "resultado": "tocado",
                     "coordenadas": (PoX, PoY),
                     "barco_tamaño": barco_tocado.tamaño,
                     "puntos_ganados": +20,
+                    "estado": "En curso",
                     "total_puntos": self.taulell.puntuacion
                 }
