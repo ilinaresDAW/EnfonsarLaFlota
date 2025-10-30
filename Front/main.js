@@ -121,7 +121,7 @@ boton.addEventListener('click', async (event) => {
                                 }
                                 if (estado === 'Derrota') {
                                     document.getElementById("bloc2").style.display = "none"
-                                    document.getElementById("bloc3").style.display = "none"
+                                    document.getElementById("bloc1").style.display = "none"
                                     document.getElementById("bloc3").style.color = "red"
 
                                     console.log(`PERDEDRO`)
