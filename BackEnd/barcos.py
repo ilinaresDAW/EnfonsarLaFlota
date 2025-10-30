@@ -13,8 +13,7 @@ class taulell:
         self.historial_disparos = []
         self.barcosHundidos = 0
         self.casillasMarcadas = 0
-        self.casillasAgua = 0
-        self.casillasMaxAgua = 0
+        self.casillasDerrota = 0
 
     # Añadir barcos desde la clase barcos
     def añadirlistabarco (self, barcos):
@@ -85,8 +84,9 @@ class taulell:
             intentos = 0  # Resetear intentos tras éxito
             if intentos >= max_intentos:
                 print("Deja de funcionar por bucle infinito MAX INTNETOS")
-        celdas_libres = self.Filas * self.Columnas - celdasOcupadas
-        self.casillasMaxAgua = round(celdas_libres / 2)#redondeo par aevitar fallos
+
+        celdas_libres = self.Filas * self.Columnas 
+        self.casillasDerrota = celdas_libres // 2 #redondeo par aevitar fallos
     
     
     
@@ -137,8 +137,7 @@ class taulell:
 
     def registrar_casilla(self, resultado):
         self.casillasMarcadas += 1
-        if resultado == "agua":
-            self.casillasAgua += 1
+    
     
     def crear_barcosMinimos(self):
         if not self.tabla: #es para omprobar q este creada y no se cree x crear sin guardar en ningun sitio aleatorio
@@ -255,7 +254,7 @@ class barcos:
                 resultado = "agua"
                 self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)
-                if self.taulell.casillasAgua >= self.taulell.casillasMaxAgua:
+                if (self.taulell.casillasMarcadas >= self.taulell.casillasDerrota and not self.taulell.comprobarBarcos()):
                     return{
                        "valor": "agua",
                         "resultado": resultado,

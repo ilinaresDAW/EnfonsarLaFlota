@@ -116,7 +116,7 @@ boton.addEventListener('click', async (event) => {
                                     document.getElementById(`ultimaJugada`).textContent = "Últim mssatge: " + nombre + " ha enfonsat vaixell en " + i + " " + j
 
                                 }
-                                if (estado === 'Derrofta') {
+                                if (estado === 'Derromta') {
                                     document.getElementById("bloc2").style.display = "none"
                                     document.getElementById("bloc3").style.display = "none"
                                     console.log(`loser`)
