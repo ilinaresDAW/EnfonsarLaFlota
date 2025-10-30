@@ -83,9 +83,6 @@ boton.addEventListener('click', async (event) => {
                 document.getElementById(i + '' + j).addEventListener('click', async (event) => {
                     let fila = i;
                     let col = j;
-                    //  });
-                    // let botonDisparo = document.getElementById("disparar")
-                    // botonDisparo.('Click', async(event)=> {
                     if (event.target.classList.contains('tocado') || event.target.classList.contains('agua') || event.target.classList.contains('hundido')) {  // <-- Mejora: Comprueba todas las clases
                         return;
                     } else {
@@ -119,18 +116,10 @@ boton.addEventListener('click', async (event) => {
                                     document.getElementById(`ultimaJugada`).textContent = "Últim mssatge: " + nombre + " ha enfonsat vaixell en " + i + " " + j
 
                                 }
-                                if (estado === 'Derrota') {
-                                    document.getElementById("bloc2").style.display = "none"
-                                    document.getElementById("bloc1").style.display = "none"
-                                    document.getElementById("bloc3").style.color = "red"
-
-                                    console.log(`PERDEDRO`)
-                                } else if (estado === 'Victoria') {
+                                if (estado === 'Derromta') {
                                     document.getElementById("bloc2").style.display = "none"
                                     document.getElementById("bloc3").style.display = "none"
-                                    document.getElementById("bloc3").style.color = "green"
-
-                                    console.log(`GANADOR`)
+                                    console.log(`loser`)
                                 }
                                 let totalDisparos = disparos + disparoFallados
                                 document.getElementById(`totalDisparos`).textContent = "Disparos " + totalDisparos
