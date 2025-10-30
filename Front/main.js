@@ -116,24 +116,13 @@ boton.addEventListener('click', async (event) => {
                                     document.getElementById(`ultimaJugada`).textContent = "Últim mssatge: " + nombre + " ha enfonsat vaixell en " + i + " " + j
 
                                 }
-                                if (estado === 'Derrota') {
+                                if (estado === 'Derromta') {
                                     document.getElementById("bloc2").style.display = "none"
-                                    document.getElementById("bloc1").style.display = "none"
-                                    document.getElementById("bloc3").style.width = "100%"
-                                    document.getElementById("final").textContent = "DERROTA"
-                                    document.getElementById("final").style.color = "red"
-                                    console.log(`PERDEDOR`)
-                                }
-                                else if (estado === 'Victoria') {
-                                    document.getElementById("bloc2").style.display = "none"
-                                    document.getElementById("bloc1").style.display = "none"
-                                    document.getElementById("bloc3").style.width = "100%"
-                                    document.getElementById("final").textContent = "Victoria"
-                                    document.getElementById("final").style.color = "green"
-                                    console.log(`GANADOR`)
+                                    document.getElementById("bloc3").style.display = "none"
+                                    console.log(`loser`)
                                 }
                                 let totalDisparos = disparos + disparoFallados
-                                document.getElementById(`totalDisparos`).textContent = totalDisparos
+                                document.getElementById(`totalDisparos`).textContent = "Disparos " + totalDisparos
 
 
                             })
