@@ -255,7 +255,7 @@ class barcos:
                 resultado = "agua"
                 self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)
-                if self.taulell.casillasMaxAgua >= self.taulell.casillasAgua:
+                if self.taulell.casillasAgua >= self.taulell.casillasMaxAgua:
                     return{
                        "valor": "agua",
                         "resultado": resultado,
