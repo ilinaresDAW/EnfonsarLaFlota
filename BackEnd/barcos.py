@@ -21,8 +21,11 @@ class taulell:
         self.lista_barcos.append(barcos)
 
     def comprobarBarcos (self):
-        return len(self.lista_barcos) > 0
-
+        for barco in self.lista_barcos:
+            if barco.cords:  # si tiene cords es q aun hay barcos
+                return False
+        return True
+    
     # Crear la matriz y devolver mensaje si está mal
     def crear_matriz(self, filas, columnas):
         if filas < 7 or columnas < 7: 
@@ -80,10 +83,10 @@ class taulell:
                 continue
             celdasOcupadas += tamaño  # Actualizar celdas ocupadas
             intentos = 0  # Resetear intentos tras éxito
-            celdas_libres = self.Filas * self.Columnas - celdasOcupadas
-            self.casillasMaxAgua = round(celdas_libres / 2)#redondeo par aevitar fallos
             if intentos >= max_intentos:
                 print("Deja de funcionar por bucle infinito MAX INTNETOS")
+        celdas_libres = self.Filas * self.Columnas - celdasOcupadas
+        self.casillasMaxAgua = round(celdas_libres / 2)#redondeo par aevitar fallos
     
     
     
@@ -132,10 +135,10 @@ class taulell:
                 self.puntuacion += 50 
                 self.barcosHundidos += 1
 
-    def registrar_casilla(Self, resultado):
-        Self.casillasMarcadas += 1
+    def registrar_casilla(self, resultado):
+        self.casillasMarcadas += 1
         if resultado == "agua":
-            Self.casillasAgua += 1
+            self.casillasAgua += 1
     
     def crear_barcosMinimos(self):
         if not self.tabla: #es para omprobar q este creada y no se cree x crear sin guardar en ningun sitio aleatorio
@@ -252,7 +255,7 @@ class barcos:
                 resultado = "agua"
                 self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)
-                if self.taulell.casillasMaxAgua == self.taulell.casillasAgua:
+                if self.taulell.casillasMaxAgua >= self.taulell.casillasAgua:
                     return{
                        "valor": "agua",
                         "resultado": resultado,
@@ -274,7 +277,7 @@ class barcos:
                 resultado = "hundido"
                 self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)  
-                if self.taulell.comprobarBarcos == False:
+                if not self.taulell.comprobarBarcos():
                     return{
                         "valor": "barco",
                         "resultado": resultado,
