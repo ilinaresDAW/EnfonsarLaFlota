@@ -60,7 +60,7 @@ class taulell:
 
         totalMatriz = self.Filas * self.Columnas
         maxTamaño = int(totalMatriz * 0.30)  # Max 30% de las celdas
-        celdasOcupadas = 0
+        celdasOcupadas = sum(barco.tamaño for barco in self.lista_barcos) #COntar barcos minimos 
         tamañoDisponible = [1, 2, 3, 4, 5]  
         max_intentos = 1000  #Creo esta variable de intentos para q no este siemple en un constante bucle y no se pete, es decir, un limite
         intentos = 0
