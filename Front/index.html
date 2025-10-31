@@ -20,36 +20,31 @@
             <h2>Configuracion del Juego</h2>
             <div class="medidas">
                 <div class="filas">
-                    <label for="filas">Amplada 7-20</label></br><input type="number" id="filas" min="7" max="20"><br>
+                    <label for="filas">Amplada 7-20</label><br><input type="number" id="filas" min="7" max="20"><br>
                 </div>
                 <div class="columnas">
-                    <label for="columnas">Alçada 7-20 </label><br><input type="number" id="columnas" min="7"
-                        max="20"><br>
+                    <label for="columnas">Alçada 7-20 </label><br><input type="number" id="columnas" min="7" max="20"><br>
                 </div>
             </div>
             <label for="nombre">Nombre de usuario </label><input type="text" id="nombre"><br>
             <button id="datos">Enviar datos</button>
-            <!--<input type="button" value="Genera una tabla" onclick="genera_tabla()" />-->
             <div class="difcultad" id="dificultad">Dificultad</div>
             <button id="reiniciar">Reiniciar</button>
-            <button id="abandonar"> Abandonar</button>
-
-
-
+            <button id="abandonar">Abandonar</button>
+            <div class="imgaen">
+                <img src="img/gameOn.jpg" alt="imgaenjuego">
+            </div>
         </div>
         <div id="bloc2" class="bloc2">
             <div class="tablero">
                 <h1>Tablero</h1>
                 <table>
-                    <tbody id="tabla">
-
-                    </tbody>
+                    <tbody id="tabla"></tbody>
                 </table>
             </div>
             <div class="botonDisparo">
                 <button id="disparar">Disparar</button>
             </div>
-
         </div>
         <div id="bloc3" class="bloc3">
             <div class="marcador">
@@ -61,9 +56,8 @@
                     <h1 id="final"></h1>
                 </div>
             </div>
-
             <div class="estats">
-                <H2>Estadisticas</H2>
+                <h2>Estadisticas</h2>
                 <p class="jugador" id="jugador">Jugador: </p>
                 <div class="estats2">
                     <h2>Estats del Jugador</h2>
@@ -74,7 +68,7 @@
                     <p class="barcosHundidos" id="barcosHundidos">Barcos Hundidos: 0</p>
                     <div class="jugadas">
                         <h2>Numero de jugadas</h2>
-                        <p id="totalDisparos"> 0 </p>
+                        <p id="totalDisparos">0</p>
                     </div>
                 </div>
             </div>
@@ -83,7 +77,6 @@
                 <p>Últim missatge: </p>
             </div>
         </div>
-    </div>
     </div>
     <script src="main.js"></script>
 </body>
