@@ -52,7 +52,7 @@ async function abandonarPartida() {
     document.getElementById("bloc3").style.width = "100%"
 }
 //Funcion 5: Reiniciar
-function reiniciarPartida(){
+function reiniciarPartida() {
     location.reload()
 }
 // ¡¡¡PRINCIPAL!!!
@@ -67,7 +67,7 @@ boton.addEventListener('click', function (event) {
 
     // Validar
     if (!validarDimensiones(filas, columnas)) {
-        return; 
+        return;
     }
 
     // Crear partida 
@@ -117,30 +117,35 @@ boton.addEventListener('click', function (event) {
                     .then(data => {
                         console.log("Listado", data)
                         let resultado = data["resultado del disparo"].resultado
+                        let puntosGanados = data["resultado del disparo"].puntos_ganados
                         let totalPuntos = data["resultado del disparo"].total_puntos
                         let estado = data["resultado del disparo"].estado
-                        document.getElementById(`puntos`).textContent = `Puntos: ` + totalPuntos
 
                         // resultado 
                         if (resultado === `agua`) {
                             event.target.classList.add(`agua`)
-                            event.target.innerHTML = `·`
+                            event.target.innerHTML = `🌊​`
                             disparosFallados++
                             document.getElementById(`disparosFallados`).textContent = `Disparos Fallados: ` + disparosFallados
                             document.getElementById(`ultimaJugada`).innerHTML = "<p>Últim mssatge: " + nombre + " ha tocat " + resultado + " en " + fila + " " + col + "</p>"
+                            document.getElementById(`puntosGanados`).textContent = `- ` + puntosGanados
                         } else if (resultado === `tocado`) {
-                            event.target.innerHTML = `|`
+                            event.target.innerHTML = `🟥​`
                             event.target.classList.add(`tocado`)
                             disparos++
                             document.getElementById(`disparos`).textContent = "Disparos Acertados: " + disparos
                             document.getElementById(`ultimaJugada`).innerHTML = "<p>Últim mssatge: " + nombre + " ha tocat vaixell en " + fila + " " + col + "</p>"
+                            document.getElementById(`puntosGanados`).textContent = `+ ` + puntosGanados
                         } else if (resultado === `hundido`) {
                             event.target.classList.add(`hundido`)
-                            event.target.innerHTML = `T`
+                            event.target.innerHTML = `☠️​`
                             hundidos++
                             document.getElementById(`barcosHundidos`).textContent = "Barcos Hundidos: " + hundidos
                             document.getElementById(`ultimaJugada`).innerHTML = "<p>Últim mssatge: " + nombre + " ha enfonsat vaixell en " + fila + " " + col + "</p>"
+                            document.getElementById(`puntosGanados`).textContent = `+ ` + puntosGanados
+
                         }
+                        document.getElementById(`puntos`).textContent = totalPuntos + ` Punts`
 
                         // Fin de juego
                         if (estado === 'Derrota') {
@@ -178,6 +183,7 @@ boton.addEventListener('click', function (event) {
 let botonAbandonar = document.getElementById('abandonar')
 botonAbandonar.addEventListener('click', function (event) {
     abandonarPartida();
+    console.log(`Abandono`)
 })
 let botonReiniciar = document.getElementById('reiniciar')
 botonReiniciar.addEventListener('click', function (event) {

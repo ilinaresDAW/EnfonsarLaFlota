@@ -38,15 +38,21 @@ header {
 
 .agua {
     background-color: blue;
+    height: 40px;
+    width: 10%;
 }
 
 .tocado {
     background-color: red;
+    height: 40px;
+    width: 10%;
+
 }
 
 .hundido {
     background-color: black;
-    color: white;
+    width: 10%;
+
 }
 
 .bloc1 {
@@ -58,7 +64,6 @@ header {
     justify-content: center;
     height: 100%;
 }
-
 
 
 .medidas {
@@ -217,12 +222,16 @@ table {
     display: flex;
 }
 
-#puntos {
+.puntos {
     color: #636AE8;
     font-weight: bold;
     font-size: 30px;
 }
-
+#puntosGanados{
+    margin-top: 0px;
+    padding: 0%;
+    
+}
 .disparos {
     display: flex;
 }
