@@ -81,12 +81,12 @@ class taulell:
                 intentos += 1
                 continue
             celdasOcupadas += tamaño  # Actualizar celdas ocupadas
-            intentos = 0  # Resetear intentos tras éxito
+            intentos = 0  # Resetear intentos tras exito
             if intentos >= max_intentos:
                 print("Deja de funcionar por bucle infinito MAX INTNETOS")
 
         celdas_libres = self.Filas * self.Columnas 
-        self.casillasDerrota = celdas_libres // 2 #redondeo par aevitar fallos
+        self.casillasDerrota = (celdas_libres * 0.7) // 2
     
     
     
@@ -136,7 +136,8 @@ class taulell:
                 self.barcosHundidos += 1
 
     def registrar_casilla(self, resultado):
-        self.casillasMarcadas += 1
+        if resultado == "agua":
+            self.casillasMarcadas += 1
     
     
     def crear_barcosMinimos(self):
