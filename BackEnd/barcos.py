@@ -260,7 +260,7 @@ class barcos:
                        "valor": "agua",
                         "resultado": resultado,
                         "coordenadas": (PoX, PoY),
-                        "puntos": -10,
+                        "puntos_ganados": -10,
                         "estado": "Derrota",
                         "total_puntos": self.taulell.puntuacion 
                     }
@@ -268,7 +268,7 @@ class barcos:
                     "valor": "agua",
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
-                    "puntos": -10,
+                    "puntos_ganados": -10,
                     "estado": "En curso",
                     "total_puntos": self.taulell.puntuacion
                 }  
@@ -282,7 +282,7 @@ class barcos:
                         "valor": "barco",
                         "resultado": resultado,
                         "coordenadas": (PoX, PoY),
-                        "puntos": +50,
+                        "puntos_ganados": +50,
                         "estado": "Victoria",
                         "total_puntos": self.taulell.puntuacion
                     }
@@ -290,7 +290,7 @@ class barcos:
                     "valor": "barco",
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
-                    "puntos": +50,
+                    "puntos_ganados": +50,
                     "estado": "En curso",
                     "total_puntos": self.taulell.puntuacion
                 } 

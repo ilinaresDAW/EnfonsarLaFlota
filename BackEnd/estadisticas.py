@@ -2,11 +2,11 @@ import json
 import os
 from datetime import datetime
 
-DATA_DIR = "data"
-FICHERO = os.path.join(DATA_DIR, "stats.json")
+carpeta = "data"
+fichero = os.path.join(carpeta, "stats.json")
 
 # Crear carpeta si no existe
-os.makedirs(DATA_DIR, exist_ok=True)
+os.makedirs(carpeta, exist_ok=True)
 
 def leer_stats():
     if not os.path.exists(FICHERO):
