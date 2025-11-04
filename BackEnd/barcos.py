@@ -60,7 +60,7 @@ class taulell:
 
         totalMatriz = self.Filas * self.Columnas
         maxTamaño = int(totalMatriz * 0.30)  # Max 30% de las celdas
-        celdasOcupadas = 0
+        celdasOcupadas = sum(barco.tamaño for barco in self.lista_barcos) #COntar barcos minimos 
         tamañoDisponible = [1, 2, 3, 4, 5]  
         max_intentos = 1000  #Creo esta variable de intentos para q no este siemple en un constante bucle y no se pete, es decir, un limite
         intentos = 0
@@ -81,12 +81,12 @@ class taulell:
                 intentos += 1
                 continue
             celdasOcupadas += tamaño  # Actualizar celdas ocupadas
-            intentos = 0  # Resetear intentos tras éxito
+            intentos = 0  # Resetear intentos tras exito
             if intentos >= max_intentos:
                 print("Deja de funcionar por bucle infinito MAX INTNETOS")
 
         celdas_libres = self.Filas * self.Columnas 
-        self.casillasDerrota = celdas_libres // 2 #redondeo par aevitar fallos
+        self.casillasDerrota = (celdas_libres * 0.7) // 2
     
     
     
@@ -136,7 +136,8 @@ class taulell:
                 self.barcosHundidos += 1
 
     def registrar_casilla(self, resultado):
-        self.casillasMarcadas += 1
+        if resultado == "agua":
+            self.casillasMarcadas += 1
     
     
     def crear_barcosMinimos(self):
@@ -259,7 +260,7 @@ class barcos:
                        "valor": "agua",
                         "resultado": resultado,
                         "coordenadas": (PoX, PoY),
-                        "puntos": -10,
+                        "puntos_ganados": -10,
                         "estado": "Derrota",
                         "total_puntos": self.taulell.puntuacion 
                     }
@@ -267,7 +268,7 @@ class barcos:
                     "valor": "agua",
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
-                    "puntos": -10,
+                    "puntos_ganados": -10,
                     "estado": "En curso",
                     "total_puntos": self.taulell.puntuacion
                 }  
@@ -281,7 +282,7 @@ class barcos:
                         "valor": "barco",
                         "resultado": resultado,
                         "coordenadas": (PoX, PoY),
-                        "puntos": +50,
+                        "puntos_ganados": +50,
                         "estado": "Victoria",
                         "total_puntos": self.taulell.puntuacion
                     }
@@ -289,7 +290,7 @@ class barcos:
                     "valor": "barco",
                     "resultado": resultado,
                     "coordenadas": (PoX, PoY),
-                    "puntos": +50,
+                    "puntos_ganados": +50,
                     "estado": "En curso",
                     "total_puntos": self.taulell.puntuacion
                 } 
