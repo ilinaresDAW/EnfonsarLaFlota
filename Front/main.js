@@ -28,7 +28,7 @@ function generarTabla(filas, columnas) {
     for (let i = 0; i < filas; i++) {
         celdas += "<tr>"
         for (let j = 0; j < columnas; j++) {
-            celdas += "<td id=" + i + j + ">*</td>"
+            celdas += "<td id=" + i + j + ">💧​</td>"
         }
         celdas += "</tr>"
     }
@@ -50,6 +50,8 @@ async function abandonarPartida() {
     document.getElementById("final").style.color = "red"
     document.getElementById("final").textContent = "DERROTA"
     document.getElementById("bloc3").style.width = "100%"
+    document.getElementById('bloc3').style.display = 'block'
+
 }
 //Funcion 5: Reiniciar
 function reiniciarPartida() {
@@ -99,6 +101,7 @@ boton.addEventListener('click', function (event) {
     document.getElementById('bloc2').style.display = 'block'
     document.getElementById('bloc3').style.display = 'block'
 
+
     // Configurar disparos
     for (let i = 0; i < filas; i++) {
         for (let j = 0; j < columnas; j++) {
@@ -127,23 +130,25 @@ boton.addEventListener('click', function (event) {
                             event.target.innerHTML = `🌊​`
                             disparosFallados++
                             document.getElementById(`disparosFallados`).textContent = `Disparos Fallados: ` + disparosFallados
-                            document.getElementById(`ultimaJugada`).innerHTML = "<p>Últim mssatge: " + nombre + " ha tocat " + resultado + " en " + fila + " " + col + "</p>"
-                            document.getElementById(`puntosGanados`).textContent = `- ` + puntosGanados
+                            document.getElementById(`ultimaJugada`).innerHTML = "<p>Últim mssatge: " + nombre + " ha tocat aigua en fila: " + fila + " columna: " + col + " ha perdut: " + puntosGanados + " punts</p>"
+                            document.getElementById(`puntosGanados`).textContent = puntosGanados
+                            document.getElementById(`puntosGanados`).style.color = `#ED2E14`
                         } else if (resultado === `tocado`) {
-                            event.target.innerHTML = `🟥​`
+                            event.target.innerHTML = `​💣​`
                             event.target.classList.add(`tocado`)
                             disparos++
                             document.getElementById(`disparos`).textContent = "Disparos Acertados: " + disparos
-                            document.getElementById(`ultimaJugada`).innerHTML = "<p>Últim mssatge: " + nombre + " ha tocat vaixell en " + fila + " " + col + "</p>"
-                            document.getElementById(`puntosGanados`).textContent = `+ ` + puntosGanados
+                            document.getElementById(`ultimaJugada`).innerHTML = "<p>Últim mssatge: " + nombre + " ha tocat vaixell en fila: " + fila + " columna: " + col + " ha guanyat: +" + puntosGanados + " punts</p>"
+                            document.getElementById(`puntosGanados`).textContent = `+` + puntosGanados
+                            document.getElementById(`puntosGanados`).style.color = `#22CC2D`
                         } else if (resultado === `hundido`) {
                             event.target.classList.add(`hundido`)
                             event.target.innerHTML = `☠️​`
                             hundidos++
                             document.getElementById(`barcosHundidos`).textContent = "Barcos Hundidos: " + hundidos
-                            document.getElementById(`ultimaJugada`).innerHTML = "<p>Últim mssatge: " + nombre + " ha enfonsat vaixell en " + fila + " " + col + "</p>"
+                            document.getElementById(`ultimaJugada`).innerHTML = "<p>Últim mssatge: " + nombre + " ha enfonsat vaixell en fila: " + fila + " columna: " + col + " ha guanyat: +" + puntosGanados + " punts</p>"
                             document.getElementById(`puntosGanados`).textContent = `+ ` + puntosGanados
-
+                            document.getElementById(`puntosGanados`).style.color = `#22CC2D`
                         }
                         document.getElementById(`puntos`).textContent = totalPuntos + ` Punts`
 

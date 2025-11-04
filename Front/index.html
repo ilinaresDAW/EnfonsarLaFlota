@@ -17,24 +17,40 @@
     <hr>
     <div class="pagina">
         <div id="bloc1" class="bloc1">
-            <h2>Configuracion del Juego</h2>
-            <div class="medidas">
-                <div class="filas">
-                    <label for="filas">Amplada 7-20</label><br><input type="number" id="filas" min="7" max="20"><br>
+            <div class="menuConf">
+                <h2>Configuracion del Juego</h2>
+                <div class="medidas">
+                    <div class="filas">
+                        <label for="filas">Amplada 7-20</label><br><input type="number" id="filas" min="7" max="20"><br>
+                    </div>
+                    <div class="columnas">
+                        <label for="columnas">Alçada 7-20 </label><br><input type="number" id="columnas" min="7"
+                            max="20"><br>
+                    </div>
+
                 </div>
-                <div class="columnas">
-                    <label for="columnas">Alçada 7-20 </label><br><input type="number" id="columnas" min="7" max="20"><br>
+                <div class="num-barcos">
+                    <label for="numBarcos">Número de barcos (1-10)</label><br>
+                    <input type="range" id="numBarcos" min="1" max="10">
                 </div>
+                <div class="dificultad">
+                    <label>Dificultad</label><br>
+                    <label><input class =""type="radio" name="dificultad" value="facil" > Fácil</label><br>
+                    <label><input type="radio" name="dificultad" value="media"> Media</label><br>
+                    <label><input type="radio" name="dificultad" value="dificil"> Difícil</label>
+                </div>
+                <label for="nombre">Nombre de usuario </label><input type="text" id="nombre"><br>
+                <button id="datos">Enviar datos</button>
+                <div class="difcultad" id="dificultad">Dificultad</div>
+                <button id="reiniciar">Reiniciar</button>
+                <button id="abandonar">Abandonar</button>
+
             </div>
-            <label for="nombre">Nombre de usuario </label><input type="text" id="nombre"><br>
-            <button id="datos">Enviar datos</button>
-            <div class="difcultad" id="dificultad">Dificultad</div>
-            <button id="reiniciar">Reiniciar</button>
-            <button id="abandonar">Abandonar</button>
-            <div class="imgaen">
+            <div class="imagenMando">
                 <img src="img/gameOn.jpg" alt="imgaenjuego">
             </div>
         </div>
+
         <div id="bloc2" class="bloc2">
             <div class="tablero">
                 <h1>Tablero</h1>
@@ -48,10 +64,12 @@
         </div>
         <div id="bloc3" class="bloc3">
             <div class="marcador">
+
                 <div>
                     <h2>Marcador</h2>
+                    <p id="puntosGanados"></p>
                     <p id="puntos" class="puntos">1000 Punts</p>
-                    <p id="puntosGanados" class="puntos"></p>
+
                 </div>
                 <div>
                     <h1 id="final"></h1>

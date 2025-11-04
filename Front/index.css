@@ -38,33 +38,34 @@ header {
 
 .agua {
     background-color: blue;
-    height: 40px;
-    width: 10%;
 }
 
 .tocado {
     background-color: red;
-    height: 40px;
-    width: 10%;
 
 }
 
 .hundido {
     background-color: black;
-    width: 10%;
 
 }
 
 .bloc1 {
     border-radius: 20px;
-    border: 1px solid rgb(112, 108, 108);
-    padding: 3%;
     text-align: center;
     width: 33%;
     justify-content: center;
     height: 100%;
 }
 
+.menuConf {
+    border: 1px solid rgb(112, 108, 108);
+    border-radius: 20px;
+    padding: 3%;
+    text-align: center;
+    justify-content: center;
+
+}
 
 .medidas {
     display: flex;
@@ -88,6 +89,27 @@ header {
     border: 1px solid rgb(174, 174, 174);
     padding: 10%;
     margin-top: 10%;
+}
+
+.num-barcos {
+    text-align: left;
+    margin-bottom: 7%;
+    margin-left: 7%;
+    margin-top: 5%;
+}
+
+#numBarcos {
+    width: 90%;
+    border-radius: 5px;
+    height: 5px;
+}
+
+
+.dificultad {
+    text-align: left;
+    margin-left: 7%;
+    margin-bottom: 7%;
+
 }
 
 #nombre {
@@ -148,8 +170,12 @@ header {
     background-color: red;
 }
 
+.iamgenMando {
+    margin-top: 10%;
+}
+
 .bloc2 {
-    /*display: none;*/
+    display: none;
     border-radius: 20px;
     width: 66%;
     height: 100%;
@@ -168,7 +194,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 7px;
-    background-color: rgb(221, 221, 235);
+    background-color: rgb(144, 184, 236);
     height: 100%;
 }
 
@@ -209,7 +235,7 @@ table {
 
 
 #bloc3 {
-    /*display: none;*/
+    display: none;
     border-radius: 20px;
     border: 1px solid rgb(112, 108, 108);
     padding: 3%;
@@ -226,12 +252,24 @@ table {
     color: #636AE8;
     font-weight: bold;
     font-size: 30px;
+    margin-top: 0%;
 }
-#puntosGanados{
+
+#puntosGanados {
     margin-top: 0px;
     padding: 0%;
-    
+    font-weight: bold;
+    font-size: 23px;
+    margin-bottom: 0%;
+    margin-left: 13%;
 }
+
+.jugador {
+    color: #636AE8;
+    font-weight: bold;
+    font-size: 20px;
+}
+
 .disparos {
     display: flex;
 }
