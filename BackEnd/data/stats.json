@@ -1,6 +1,6 @@
 {
-  "total_partidas": 0,
-  "mejor_puntuacion": 0,
-  "millor_jugador": "",
-  "ranquing_top5": []
+  "total_partidas" :0,
+  "mejor_puntuacion" : 0,
+  "mejor_jugador" : "ninguno",
+  "top5" : []
 }

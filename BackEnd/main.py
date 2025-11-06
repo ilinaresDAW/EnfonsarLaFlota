@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import barcos as b
+import estadisticas as e
 
 # Crear la aplicación
 app = FastAPI(title="Hundir la flota", version="1.0.0")
@@ -113,3 +114,7 @@ def juego(game_id: str):
         "partida": resultado,
         "status": "created successfully"
     }
+
+@app.get("/stats/{game_id}/{nom}")
+def stats(game_id: str, nom: str):
+    return e.obtener_stats()

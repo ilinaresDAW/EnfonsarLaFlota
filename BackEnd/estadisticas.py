@@ -1,62 +1,72 @@
-import json
 import os
-from datetime import datetime
+import json
 
-carpeta = "data"
-fichero = os.path.join(carpeta, "stats.json")
+# ruta 
+CARPETA = "data"
+FICHERO = "data/stats.json"
 
-# Crear carpeta si no existe
-os.makedirs(carpeta, exist_ok=True)
+# crear la carpeta si no existe 
+if not os.path.exists(CARPETA):
+    os.makedirs(CARPETA)
 
-def leer_stats():
-    if not os.path.exists(FICHERO):
-        # Crear fitxer inicial
-        stats_inicial = {
-            "total_partides": 0,
-            "millor_puntuacio": 0,
-            "millor_jugador": "",
-            "data_millor": "",
-            "top5": []
-        }
-        rellenar_stats(stats_inicial)
-        return stats_inicial
+total_partidas = 0
+mejor_puntuacion = 0
+mejor_jugador = "ninguno"
+top5 = []  
 
-    with open(FICHERO, "fichero") as f:
-        return json.load(f)
+# si el fichero json existe se usa ese si no se crea uno de 0 con los parametros por defecto
+if os.path.exists(FICHERO):
+    try:
+        with open(FICHERO) as ficheroAbrir:
+            datos = json.load(ficheroAbrir)# guardo los datos del fichero en una variable
+            total_partidas = datos["total_partidas"]
+            mejor_puntuacion = datos["mejor_puntuacion"]
+            mejor_jugador = datos["mejor_jugador"]
+            top5 = datos["top5"]
+    except:
+        print("No hay ningun json creado, se usaran valroes x defecto")
 
-#explicarlo bien para sergi coca
-def rellenar_stats(stats):
-    temp_file = FICHERO + ".tmp"
-    with open(temp_file, "w", encoding="utf-8") as f:
-        json.dump(stats, f, indent=2, ensure_ascii=False)
-    # Substitució final
-    if os.path.exists(FICHERO):
-        os.remove(FICHERO)
-    os.rename(temp_file, FICHERO)
-
-def añadir_partida(jugador, puntuacio, files, columnes, es_victoria=True):
-    stats = leer_stats()
-
-    stats["total_partides"] += 1
-
-    # actualizo el top 5
-    if puntuacio > stats["millor_puntuacio"]:
-        stats["millor_puntuacio"] = puntuacio
-        stats["millor_jugador"] = jugador
-
-    nova_entrada = {
-        "jugador": jugador,
-        "puntuacio": puntuacio,
-        "files": files,
-        "columnes": columnes,
+# guardar los nuevos datos 
+def guardar():
+    datos = {
+        "total_partidas": total_partidas,
+        "mejor_puntuacion": mejor_puntuacion,
+        "mejor_jugador": mejor_jugador,
+        "top5": top5
     }
+    with open(FICHERO, 'w') as ficheroAbrir: # q se abra modo lectura W
+        json.dump(datos, ficheroAbrir)
+    print("stats guardadas en data/stats.json")
 
-    # agrego el resultado y lo ordeno
-    stats["top5"].append(nova_entrada)
-    stats["top5"] = sorted(stats["top5"], key=lambda x: x["puntuacio"], reverse=True)[:5]
+# terminar partida
+def terminar_partida(jugador, puntuacion, filas, columnas):
+    global mejor_puntuacion, mejor_jugador, top5
 
-    # guardo el resultado
-    rellenar_stats(stats)
+    # mejor puntuacion
+    if puntuacion > mejor_puntuacion:
+        mejor_puntuacion = puntuacion
+        mejor_jugador = jugador
 
-def obtenir_stats():
-    return leer_stats()
+    top5.append({
+        "jugador": jugador,
+        "puntuacion": puntuacion,
+        "filas": filas,
+        "columnas": columnas
+    })
+
+    # key=lambda x: x["puntuacion"] → "ordena por el valor de 'puntuacion' de cada jugador"
+    # Es como decir "no compares los nombres, compara solo los puntos"
+    # reverse=True → pone el mas alto primero
+    top5.sort(key=lambda x: x["puntuacion"], reverse=True)
+    top5[:] = top5[:5]  
+
+    guardar()  
+
+# obtener stats
+def obtener_stats():
+    return {
+        "total_partidas": total_partidas,
+        "mejor_puntuacion": mejor_puntuacion,
+        "mejor_jugador": mejor_jugador,
+        "top5": top5
+    }
