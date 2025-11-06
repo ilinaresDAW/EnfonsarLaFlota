@@ -1,3 +1,9 @@
+@media screen and (max-width: 375px) and (max-height: 667px) {
+  body * {
+    display: none !important;
+  }
+}
+
 body {
     font-family: 'Inter', sans-serif;
 }
@@ -300,3 +306,5 @@ table {
     margin-left: 20%;
     margin-left: 60%;
 }
+
+

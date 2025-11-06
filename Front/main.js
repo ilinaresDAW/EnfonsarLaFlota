@@ -80,7 +80,7 @@ boton.addEventListener('click', function (event) {
     }
 
     // Crear partida 
-    fetch(`http://127.0.0.1:8000/createGame/${idPartida}/${filas}/${columnas}/`)
+    fetch(`http://127.0.0.1:8000/createGame/${idPartida}/${filas}/${columnas}/${nombre}`)
         .then(response => response.json())
         .then(data => { console.log("Listado", data); })
         .catch(error => { console.error("Error al enviar datos:", error); })
