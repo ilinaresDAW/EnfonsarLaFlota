@@ -57,6 +57,13 @@ async function abandonarPartida() {
 function reiniciarPartida() {
     location.reload()
 }
+//Funcion 6: mostrar estadistias
+function mostrarEstats() {
+    fetch(`http://127.0.0.1:8000/stats/${idPartida}/${nombre}/`)
+        .then(response => response.json())
+        .then(data => { console.log("Listado", data); })
+        .catch(error => { console.error("Error al enviar datos:", error); })
+}
 // ¡¡¡PRINCIPAL!!!
 let boton = document.getElementById('datos')
 boton.addEventListener('click', function (event) {
@@ -73,7 +80,7 @@ boton.addEventListener('click', function (event) {
     }
 
     // Crear partida 
-    fetch(`http://127.0.0.1:8000/createGame/${idPartida}/${filas}/${columnas}`)
+    fetch(`http://127.0.0.1:8000/createGame/${idPartida}/${filas}/${columnas}/`)
         .then(response => response.json())
         .then(data => { console.log("Listado", data); })
         .catch(error => { console.error("Error al enviar datos:", error); })
@@ -159,6 +166,7 @@ boton.addEventListener('click', function (event) {
                             document.getElementById("final").style.color = "red"
                             document.getElementById("final").textContent = "DERROTA"
                             document.getElementById("bloc3").style.width = "100%"
+                            mostrarEstats()
 
                             console.log(`PERDEDOR`);
                         } else if (estado === 'Victoria') {
@@ -167,8 +175,9 @@ boton.addEventListener('click', function (event) {
                             document.getElementById("final").style.color = "green"
                             document.getElementById("final").textContent = "VICTORIA"
                             document.getElementById("bloc3").style.width = "100%"
-
                             console.log(`GANADOR`);
+                            mostrarEstats()
+
                         }
 
                         // Total disparos
@@ -177,17 +186,17 @@ boton.addEventListener('click', function (event) {
                     })
                     .catch(error => {
                         console.error("Error al enviar datos:", error);
-                    });
+                    })
 
                 console.log('Click en ' + fila + ' y ' + col);
-            });
+            })
         }
     }
 });
 
 let botonAbandonar = document.getElementById('abandonar')
 botonAbandonar.addEventListener('click', function (event) {
-    abandonarPartida();
+    abandonarPartida()
     console.log(`Abandono`)
 })
 let botonReiniciar = document.getElementById('reiniciar')
@@ -195,3 +204,4 @@ botonReiniciar.addEventListener('click', function (event) {
     console.log(`Reinicio`)
     reiniciarPartida();
 })
+
