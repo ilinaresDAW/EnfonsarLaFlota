@@ -1,6 +1,1 @@
-{
-  "total_partidas" :0,
-  "mejor_puntuacion" : 0,
-  "mejor_jugador" : "ninguno",
-  "top5" : []
-}
+{"total_partidas": 4, "mejor_puntuacion": 1450, "mejor_jugador": "{nom}", "top5": [{"jugador": "{nom}", "puntuacion": 1450, "filas": 7, "columnas": 7}, {"jugador": "lolololol", "puntuacion": 1440, "filas": 7, "columnas": 7}, {"jugador": " nbv", "puntuacion": 1290, "filas": 7, "columnas": 7}, {"jugador": "mnbv", "puntuacion": 1140, "filas": 7, "columnas": 7}]}
