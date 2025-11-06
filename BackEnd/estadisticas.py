@@ -40,7 +40,9 @@ def guardar():
 
 # terminar partida
 def terminar_partida(jugador, puntuacion, filas, columnas):
-    global mejor_puntuacion, mejor_jugador, top5
+    global total_partidas, mejor_puntuacion, mejor_jugador, top5
+
+    total_partidas += 1  
 
     # mejor puntuacion
     if puntuacion > mejor_puntuacion:

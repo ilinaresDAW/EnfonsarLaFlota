@@ -1,4 +1,5 @@
 import random as rd
+import estadisticas as e
 
 
 # Clase taulell
@@ -14,10 +15,14 @@ class taulell:
         self.barcosHundidos = 0
         self.casillasMarcadas = 0
         self.casillasDerrota = 0
+        self.nom = str
 
     # Añadir barcos desde la clase barcos
     def añadirlistabarco (self, barcos):
         self.lista_barcos.append(barcos)
+    
+    def registrarNom (self , nom):
+        self.nom = nom 
 
     def comprobarBarcos (self):
         for barco in self.lista_barcos:
@@ -256,6 +261,7 @@ class barcos:
                 self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)
                 if (self.taulell.casillasMarcadas >= self.taulell.casillasDerrota and not self.taulell.comprobarBarcos()):
+                    e.terminar_partida(self.taulell.nom, self.taulell.puntuacion, self.taulell.Filas, self.taulell.Columnas)
                     return{
                        "valor": "agua",
                         "resultado": resultado,
@@ -278,6 +284,7 @@ class barcos:
                 self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)  
                 if self.taulell.comprobarBarcos():
+                    e.terminar_partida(self.taulell.nom, self.taulell.puntuacion, self.taulell.Filas, self.taulell.Columnas)
                     return{
                         "valor": "barco",
                         "resultado": resultado,
