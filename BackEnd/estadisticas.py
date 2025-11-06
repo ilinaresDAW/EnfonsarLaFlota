@@ -64,7 +64,7 @@ def terminar_partida(jugador, puntuacion, filas, columnas):
 
     guardar()  
 
-# obtener stats
+# obtener stats 
 def obtener_stats():
     return {
         "total_partidas": total_partidas,
