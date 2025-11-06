@@ -35,7 +35,7 @@
                 </div>
                 <div class="dificultad">
                     <label>Dificultad</label><br>
-                    <label><input class =""type="radio" name="dificultad" value="facil" > Fácil</label><br>
+                    <label><input class="" type="radio" name="dificultad" value="facil"> Fácil</label><br>
                     <label><input type="radio" name="dificultad" value="media"> Media</label><br>
                     <label><input type="radio" name="dificultad" value="dificil"> Difícil</label>
                 </div>
@@ -50,50 +50,53 @@
                 <img src="img/gameOn.jpg" alt="imgaenjuego">
             </div>
         </div>
-
-        <div id="bloc2" class="bloc2">
-            <div class="tablero">
-                <h1>Tablero</h1>
-                <table>
-                    <tbody id="tabla"></tbody>
-                </table>
-            </div>
-            <div class="botonDisparo">
-                <button id="disparar">Disparar</button>
-            </div>
-        </div>
-        <div id="bloc3" class="bloc3">
-            <div class="marcador">
-
-                <div>
-                    <h2>Marcador</h2>
-                    <p id="puntosGanados"></p>
-                    <p id="puntos" class="puntos">1000 Punts</p>
-
+        <div class="bloc23">
+            <div id="bloc2" class="bloc2">
+                <div class="tablero">
+                    <h1>Tablero</h1>
+                    <table>
+                        <tbody id="tabla"></tbody>
+                    </table>
                 </div>
-                <div>
-                    <h1 id="final"></h1>
+                <div class="botonDisparo">
+                    <button id="disparar">Disparar</button>
                 </div>
             </div>
-            <div class="estats">
-                <h2>Estadisticas</h2>
-                <p class="jugador" id="jugador">Jugador: </p>
-                <div class="estats2">
-                    <h2>Estats del Jugador</h2>
-                    <div class="disparos">
-                        <p class="disparosAcertados" id="disparos">Disparos Acertados: 0</p>
-                        <p class="disparosFallados" id="disparosFallados">Disparos fallados: 0</p>
+            <div id="bloc3" class="bloc3">
+                <div class="bloc3p1">
+                    <div class="marcador">
+                        <div>
+                            <h2>Marcador</h2>
+                            <p id="puntosGanados"></p>
+                            <p id="puntos" class="puntos">1000 Punts</p>
+
+                        </div>
+                        <div>
+                            <h1 id="final"></h1>
+                        </div>
                     </div>
-                    <p class="barcosHundidos" id="barcosHundidos">Barcos Hundidos: 0</p>
+                    <div class="estats">
+                        <h2>Estadisticas</h2>
+                        <p class="jugador" id="jugador">Jugador: </p>
+                    </div>
+                </div>
+                    <div class="estats2">
+                        <h2>Estats del Jugador</h2>
+                        <div class="disparos">
+                            <p class="disparosAcertados" id="disparos">Disparos Acertados: 0</p>
+                            <p class="disparosFallados" id="disparosFallados">Disparos fallados: 0</p>
+                        </div>
+                        <p class="barcosHundidos" id="barcosHundidos">Barcos Hundidos: 0</p>
+                </div>    
                     <div class="jugadas">
                         <h2>Numero de jugadas</h2>
                         <p id="totalDisparos">0</p>
                     </div>
+                
+                <hr>
+                <div id="ultimaJugada">
+                    <p>Últim missatge: </p>
                 </div>
-            </div>
-            <hr>
-            <div id="ultimaJugada">
-                <p>Últim missatge: </p>
             </div>
         </div>
     </div>

@@ -14,12 +14,17 @@ const idPartida = generarIdPartida();
 console.log("ID: ", idPartida);
 
 // Funcion 2: Validar
-function validarDimensiones(filas, columnas) {
+function validarDimensiones(filas, columnas,nombre) {
     if (columnas > 20 || columnas < 7 || filas > 20 || filas < 7) {
         alert("Numero de filas o columnas invalido recuerda introducir del 7 a 20")
         return false
+    } else if (nombre === "Anonimo") {
+        alert("Introduce nombre !!!")
+        return false
+    } else {
+        return true
+
     }
-    return true
 }
 
 // Funcion 3: Generar la tabla 
@@ -71,11 +76,11 @@ boton.addEventListener('click', function (event) {
 
     let filas = document.getElementById('filas').value
     let columnas = document.getElementById('columnas').value
-    let nombre = document.getElementById('nombre').value
+    let nombre = document.getElementById('nombre').value.trim() || 'Anonimo'
     console.log("nombre " + nombre + " filas " + filas + " columnas " + columnas)
 
     // Validar
-    if (!validarDimensiones(filas, columnas)) {
+    if (!validarDimensiones(filas, columnas,nombre)) {
         return;
     }
 
@@ -167,7 +172,6 @@ boton.addEventListener('click', function (event) {
                             document.getElementById("final").textContent = "DERROTA"
                             document.getElementById("bloc3").style.width = "100%"
                             mostrarEstats()
-
                             console.log(`PERDEDOR`);
                         } else if (estado === 'Victoria') {
                             document.getElementById("bloc2").style.display = "none"
