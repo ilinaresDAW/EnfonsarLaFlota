@@ -84,30 +84,38 @@ boton.addEventListener('click', function (event) {
         return;
     }
 
-    // Crear partida 
-    fetch(`http://127.0.0.1:8000/createGame/${idPartida}/${filas}/${columnas}/${nombre}`)
-        .then(response => response.json())
-        .then(data => { console.log("Listado", data); })
-        .catch(error => { console.error("Error al enviar datos:", error); })
-
     // jugador
     document.getElementById(`jugador`).textContent = `Jugador: ` + nombre
     // Generar tabla 
     generarTabla(filas, columnas)
 
-    // Dificultad 
+    // Dificultad
+    let Dfacil = document.getElementById(`facil`)
+    let Dmedio = document.getElementById(`medio`)
+    let Ddificil = document.getElementById(`dificil`)
+
     let dificultadTexto = ""
-    if (filas <= 10 && columnas <= 10) {
+    if (Dfacil.checked) {
         dificultadTexto = "Facil"
         console.log(`dificultad establecida facil`)
-    } else if (filas <= 15 && columnas <= 15) {
+    } else if (Dmedio.checked) {
         dificultadTexto = "Media"
         console.log(`dificultad establecida media`)
-    } else {
+    } else if (Ddificil.checked) {
         dificultadTexto = "Dificil"
         console.log(`dificultad establecida dificil`)
+    } else {
+        alert(`ESTA MAL`)
+        return
     }
-    document.getElementById(`dificultad`).textContent = dificultadTexto
+    document.getElementById(`textoDificultad`).textContent = dificultadTexto
+    
+    // Crear partida 
+    fetch(`http://127.0.0.1:8000/createGame/${idPartida}/${filas}/${columnas}/${nombre}/${dificultadTexto}`)
+        .then(response => response.json())
+        .then(data => { console.log("Listado", data); })
+        .catch(error => { console.error("Error al enviar datos:", error); })
+
 
     // Mostrar bloques 2 3
     document.getElementById('bloc2').style.display = 'block'
