@@ -16,6 +16,7 @@ class taulell:
         self.casillasMarcadas = 0
         self.casillasDerrota = 0
         self.nom = str
+        self.dificultad = str
 
     # Añadir barcos desde la clase barcos
     def añadirlistabarco (self, barcos):
@@ -23,6 +24,9 @@ class taulell:
     
     def registrarNom (self , nom):
         self.nom = nom 
+    
+    def registrarDificultad (self , dificultad):
+        self.dificultad = dificultad.lower()
 
     def comprobarBarcos (self):
         for barco in self.lista_barcos:
@@ -89,9 +93,13 @@ class taulell:
             intentos = 0  # Resetear intentos tras exito
             if intentos >= max_intentos:
                 print("Deja de funcionar por bucle infinito MAX INTNETOS")
-
         celdas_libres = self.Filas * self.Columnas 
-        self.casillasDerrota = (celdas_libres * 0.7) // 2
+        if self.dificultad == "facil":
+            self.casillasDerrota = round((celdas_libres * 0.70) // 2)
+        if self.dificultad == "media":
+            self.casillasDerrota = round((celdas_libres * 0.65) // 2)
+        if self.dificultad == "dificil":
+            self.casillasDerrota = round((celdas_libres * 0.60) // 2)
     
     
     

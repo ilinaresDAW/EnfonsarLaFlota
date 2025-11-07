@@ -20,8 +20,8 @@ app.add_middleware(
 def read_root():
     return {"mensaje": "Hundir la flota!"}
 
-@app.get("/createGame/{game_id}/{PoX}/{PoY}/{nom}")
-def crear_juego(game_id: str, PoX: int, PoY: int, nom: str):
+@app.get("/createGame/{game_id}/{PoX}/{PoY}/{nom}/{dificultad}")
+def crear_juego(game_id: str, PoX: int, PoY: int, nom: str, dificultad: str):
     # Crear nuevo tablero para este game_id
     mi_taulell = b.taulell(PoX, PoY)
     mi_taulell.registrarNom(nom)
