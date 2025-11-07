@@ -189,6 +189,7 @@ boton.addEventListener('click', function (event) {
                             document.getElementById("final").style.color = "red"
                             document.getElementById("final").textContent = "DERROTA"
                             document.getElementById("bloc3").style.width = "100%"
+                            document.getElementById
                             mostrarEstats()
                             console.log(`PERDEDOR`)
 
@@ -229,6 +230,6 @@ botonReiniciar.addEventListener('click', function (event) {
     reiniciarPartida();
 })
 
-//window.onbeforeunload = function (event) {
-  //  return "¿Seguro que quieres salir de la partida?";
-//};
+window.onbeforeunload = function (event) {
+   return "¿Seguro que quieres salir de la partida?";
+};
