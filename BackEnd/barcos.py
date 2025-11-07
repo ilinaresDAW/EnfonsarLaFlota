@@ -268,7 +268,7 @@ class barcos:
                 resultado = "agua"
                 self.taulell.registrar_casilla(resultado)
                 self.taulell.registrar_disparo(resultado, PoX, PoY)
-                if (self.taulell.casillasMarcadas >= self.taulell.casillasDerrota and not self.taulell.comprobarBarcos()):
+                if (self.taulell.casillasMarcadas >= self.taulell.casillasDerrota and self.taulell.comprobarBarcos()):
                     e.terminar_partida(self.taulell.nom, self.taulell.puntuacion, self.taulell.Filas, self.taulell.Columnas)
                     return{
                        "valor": "agua",
