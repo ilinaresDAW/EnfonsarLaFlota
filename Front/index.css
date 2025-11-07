@@ -331,10 +331,86 @@ table {
 
     #bloc3 {
         display: flex;
-        flex-direction: row;
         width: 100%;
-        height: 13%;
+        height: 18%;
+        padding: 0%;
+        margin: 0%;
+        margin-left: 1%;
     }
 
+    .bloc3p1 {
+        display: flex;
+        width: 100%;
+    }
 
+    .estats2 {
+        margin-right: 5%;
+        margin-left: 6%;
+    }
+
+    .jugador {
+        color: #636AE8;
+        font-weight: bold;
+        font-size: 15px;
+
+    }
+
+    .puntos {
+        color: #636AE8;
+        font-weight: bold;
+        font-size: 20px;
+        margin-top: 0%;
+        display: flex;
+
+    }
+
+    .disparosAcertados,
+    .disparosFallados,
+    .barcosHundidos {
+        padding: 4px;
+        background-color: #f0f0f0;
+        border-radius: 20px;
+        font-size: 10px;
+        color: #555;
+        width: 60px;
+        height: 20%;
+        display: flex;
+    }
+
+    h2 {
+        font-size: 15px;
+    }
+
+    .marcador {
+        display: flex;
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-top: 4%;
+    }
+
+    .jugador {
+        display: flex;
+
+    }
+
+    .disparos {
+        display: flex;
+
+    }
+
+    .jugadas {
+        margin-top: 5%;
+        margin-right: 0%;
+        width: 15%;
+    }
+
+    #ultimaJugada {
+        margin-top: 0%;
+        margin-left: 0%;
+
+    }
+
+    .hr {
+        display: none;     
+    }
 }
