@@ -10,7 +10,13 @@ let puntos = 0;
 function generarIdPartida() {
     return crypto.randomUUID();
 }
-const idPartida = generarIdPartida();
+let idPartida = localStorage.getItem("idPartida");
+// Si no existe, lo creamos y guardamos
+if (!idPartida) {
+    idPartida = generarIdPartida();
+    localStorage.setItem("idPartida", idPartida);
+}
+
 console.log("ID: ", idPartida);
 
 // Funcion 2: Validar
