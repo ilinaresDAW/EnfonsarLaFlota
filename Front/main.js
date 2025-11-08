@@ -185,6 +185,7 @@ boton.addEventListener('click', function (event) {
                             document.getElementById("final").style.color = "red"
                             document.getElementById("final").textContent = "DERROTA"
                             document.getElementById("bloc3").style.width = "100%"
+                            document.getElementById
                             mostrarEstats()
                             console.log(`PERDEDOR`);
                         } else if (estado === 'Victoria') {
@@ -223,3 +224,9 @@ botonReiniciar.addEventListener('click', function (event) {
     reiniciarPartida();
 })
 
+<<<<<<< HEAD
+=======
+window.onbeforeunload = function (event) {
+   return "¿Seguro que quieres salir de la partida?";
+};
+>>>>>>> f3c925ace48f98b72f573fa3e4139ffb9db26128
