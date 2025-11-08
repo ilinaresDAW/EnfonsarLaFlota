@@ -590,7 +590,9 @@ table {
         text-align: center;
         margin: 5px 0;
     }
-
+    #ultimaJugada{
+        display: none;
+    }
     #estadisticas {
         height: auto;
         margin-top: 0px;
