@@ -20,7 +20,7 @@ if (!idPartida) {
 console.log("ID: ", idPartida);
 
 // Funcion 2: Validar
-function validarDimensiones(filas, columnas, nombre) {
+function validarDimensiones(filas, columnas,nombre) {
     if (columnas > 20 || columnas < 7 || filas > 20 || filas < 7) {
         alert("Numero de filas o columnas invalido recuerda introducir del 7 a 20")
         return false
@@ -67,8 +67,6 @@ async function abandonarPartida() {
 //Funcion 5: Reiniciar
 function reiniciarPartida() {
     location.reload()
-    console.log(`Reinicio`)
-
 }
 //Funcion 6: mostrar estadistias
 function mostrarEstats() {
@@ -80,8 +78,6 @@ function mostrarEstats() {
 // ¡¡¡PRINCIPAL!!!
 let boton = document.getElementById('datos')
 boton.addEventListener('click', function (event) {
-    event.preventDefault();
-
     console.log('Click en datos')
 
     let filas = document.getElementById('filas').value
@@ -90,7 +86,7 @@ boton.addEventListener('click', function (event) {
     console.log("nombre " + nombre + " filas " + filas + " columnas " + columnas)
 
     // Validar
-    if (!validarDimensiones(filas, columnas, nombre)) {
+    if (!validarDimensiones(filas, columnas,nombre)) {
         return;
     }
 
@@ -119,7 +115,7 @@ boton.addEventListener('click', function (event) {
         return
     }
     document.getElementById(`textoDificultad`).textContent = dificultadTexto
-
+    
     // Crear partida 
     fetch(`http://127.0.0.1:8000/createGame/${idPartida}/${filas}/${columnas}/${nombre}/${dificultadTexto}`)
         .then(response => response.json())
@@ -190,17 +186,15 @@ boton.addEventListener('click', function (event) {
                             document.getElementById("final").textContent = "DERROTA"
                             document.getElementById("bloc3").style.width = "100%"
                             mostrarEstats()
-                            console.log(`PERDEDOR`)
-
+                            console.log(`PERDEDOR`);
                         } else if (estado === 'Victoria') {
                             document.getElementById("bloc2").style.display = "none"
                             document.getElementById("bloc1").style.display = "none"
                             document.getElementById("final").style.color = "green"
                             document.getElementById("final").textContent = "VICTORIA"
                             document.getElementById("bloc3").style.width = "100%"
-                            console.log(`GANADOR`)
+                            console.log(`GANADOR`);
                             mostrarEstats()
-
 
                         }
 
@@ -229,6 +223,3 @@ botonReiniciar.addEventListener('click', function (event) {
     reiniciarPartida();
 })
 
-//window.onbeforeunload = function (event) {
-  //  return "¿Seguro que quieres salir de la partida?";
-//};
