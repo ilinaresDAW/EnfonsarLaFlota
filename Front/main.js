@@ -20,7 +20,7 @@ if (!idPartida) {
 console.log("ID: ", idPartida);
 
 // Funcion 2: Validar
-function validarDimensiones(filas, columnas,nombre) {
+function validarDimensiones(filas, columnas, nombre) {
     if (columnas > 20 || columnas < 7 || filas > 20 || filas < 7) {
         alert("Numero de filas o columnas invalido recuerda introducir del 7 a 20")
         return false
@@ -70,9 +70,75 @@ function reiniciarPartida() {
 }
 //Funcion 6: mostrar estadistias
 function mostrarEstats() {
+    document.getElementById("estadisticas").style.display = `block`
     fetch(`http://127.0.0.1:8000/stats/${idPartida}/${nombre}/`)
         .then(response => response.json())
-        .then(data => { console.log("Listado", data); })
+        .then(data => {
+            console.log("Listado", data)
+            let mejoPuntuacion = data.mejor_puntuacion
+            let mejorJugador = data.mejor_jugador
+            let totalPartidas = data.total_partidas
+            let top5 = data.top5
+
+            if (top5 && top5.length >= 5) {
+                let jugador1 = top5[0].jugador
+                let puntuacion1 = top5[0].puntuacion
+                let filas1 = top5[0].filas
+                let columnas1 = top5[0].columnas
+
+                let jugador2 = top5[1].jugador
+                let puntuacion2 = top5[1].puntuacion
+                let filas2 = top5[1].filas
+                let columnas2 = top5[1].columnas
+
+                let jugador3 = top5[2].jugador
+                let puntuacion3 = top5[2].puntuacion
+                let filas3 = top5[2].filas
+                let columnas3 = top5[2].columnas
+
+                let jugador4 = top5[3].jugador
+                let puntuacion4 = top5[3].puntuacion
+                let filas4 = top5[3].filas
+                let columnas4 = top5[3].columnas
+
+                let jugador5 = top5[4].jugador
+                let puntuacion5 = top5[4].puntuacion
+                let filas5 = top5[4].filas
+                let columnas5 = top5[4].columnas
+
+                document.getElementById("mejorPuntuacion").textContent = mejoPuntuacion
+                document.getElementById("mejorJugador").textContent = mejorJugador
+                document.getElementById("totalPartidas").textContent = totalPartidas
+
+                document.getElementById("jugador0").textContent = jugador1
+                document.getElementById("puntuacion0").textContent = puntuacion1
+                document.getElementById("filas0").textContent = filas1
+                document.getElementById("columnas0").textContent = columnas1
+
+                document.getElementById("jugador1").textContent = jugador2
+                document.getElementById("puntuacion1").textContent = puntuacion2
+                document.getElementById("filas1").textContent = filas2
+                document.getElementById("columnas1").textContent = columnas2
+
+                document.getElementById("jugador2").textContent = jugador3
+                document.getElementById("puntuacion2").textContent = puntuacion3
+                document.getElementById("filas2").textContent = filas3
+                document.getElementById("columnas2").textContent = columnas3
+
+                document.getElementById("jugador3").textContent = jugador4
+                document.getElementById("puntuacion3").textContent = puntuacion4
+                document.getElementById("filas3").textContent = filas4
+                document.getElementById("columnas3").textContent = columnas4
+
+                document.getElementById("jugador4").textContent = jugador5
+                document.getElementById("puntuacion4").textContent = puntuacion5
+                document.getElementById("filas4").textContent = filas5
+                document.getElementById("columnas4").textContent = columnas5
+            } else {
+                console.log("Data no es array válido o vacío");
+            }
+
+        })
         .catch(error => { console.error("Error al enviar datos:", error); })
 }
 // ¡¡¡PRINCIPAL!!!
@@ -86,7 +152,7 @@ boton.addEventListener('click', function (event) {
     console.log("nombre " + nombre + " filas " + filas + " columnas " + columnas)
 
     // Validar
-    if (!validarDimensiones(filas, columnas,nombre)) {
+    if (!validarDimensiones(filas, columnas, nombre)) {
         return;
     }
 
@@ -115,7 +181,7 @@ boton.addEventListener('click', function (event) {
         return
     }
     document.getElementById(`textoDificultad`).textContent = dificultadTexto
-    
+
     // Crear partida 
     fetch(`http://127.0.0.1:8000/createGame/${idPartida}/${filas}/${columnas}/${nombre}/${dificultadTexto}`)
         .then(response => response.json())
@@ -126,6 +192,8 @@ boton.addEventListener('click', function (event) {
     // Mostrar bloques 2 3
     document.getElementById('bloc2').style.display = 'block'
     document.getElementById('bloc3').style.display = 'block'
+    //document.getElementById('bloc23').style.display = 'block'
+
 
 
     // Configurar disparos
@@ -185,17 +253,21 @@ boton.addEventListener('click', function (event) {
                             document.getElementById("final").style.color = "red"
                             document.getElementById("final").textContent = "DERROTA"
                             document.getElementById("bloc3").style.width = "100%"
-                            document.getElementById
+                            document.getElementById("bloc23").style.width = "63%"
                             mostrarEstats()
+                            document.getElementById("bloc23").classList.add("finalizado")
+
                             console.log(`PERDEDOR`);
                         } else if (estado === 'Victoria') {
                             document.getElementById("bloc2").style.display = "none"
                             document.getElementById("bloc1").style.display = "none"
+                            document.getElementById("bloc3").style.width = "100%"
                             document.getElementById("final").style.color = "green"
                             document.getElementById("final").textContent = "VICTORIA"
-                            document.getElementById("bloc3").style.width = "100%"
+                            document.getElementById("bloc23").style.width = "63%"
                             console.log(`GANADOR`);
                             mostrarEstats()
+                            document.getElementById("bloc23").classList.add("finalizado")
 
                         }
 
@@ -224,9 +296,6 @@ botonReiniciar.addEventListener('click', function (event) {
     reiniciarPartida();
 })
 
-<<<<<<< HEAD
-=======
 window.onbeforeunload = function (event) {
-   return "¿Seguro que quieres salir de la partida?";
+    return "¿Seguro que quieres salir de la partida?";
 };
->>>>>>> f3c925ace48f98b72f573fa3e4139ffb9db26128

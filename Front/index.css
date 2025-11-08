@@ -8,6 +8,7 @@ label {
 
 .pagina {
     display: flex;
+
 }
 
 h1 {
@@ -300,9 +301,52 @@ table {
 #final {
     font-size: 100px;
     font-weight: bold;
-    margin-left: 20%;
-    margin-left: 60%;
+    margin-bottom: 0%;
 }
+
+#estadisticas {
+    display: none;
+    padding-top: 1%;
+    margin-top: -10px;
+    padding: 25px;
+    width: 60%;
+    margin: auto;
+    margin-top: 1px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid rgb(112, 108, 108);
+
+}
+
+#estadisticas h2,
+#estadisticas h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.info-general p {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.tabla-top5 {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.tabla-top5 th {
+    background: #636AE8;
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.tabla-top5 td {
+    border: 1px solid black;
+    padding: 8px;
+    font-size: 15px;
+}
+
 
 @media screen and (max-width: 1024px) {
 
@@ -310,6 +354,11 @@ table {
         display: flex;
 
     }
+
+    .bloc23.finalizado {
+        display: none;
+    }
+
 
     #bloc1 {
         order: 1;
@@ -320,10 +369,10 @@ table {
         order: 2;
         width: 100%;
         flex-direction: column;
-
     }
 
     #bloc2 {
+        display: none;
         order: 3;
         width: 100%;
         margin-top: 3%;
@@ -332,7 +381,7 @@ table {
     #bloc3 {
         display: flex;
         width: 100%;
-        height: 18%;
+        height: 25%;
         padding: 0%;
         margin: 0%;
         margin-left: 1%;
@@ -411,6 +460,283 @@ table {
     }
 
     .hr {
-        display: none;     
+        display: none;
+    }
+
+
+}
+
+@media screen and (max-width: 450px) {
+    .pagina {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #bloc1 {
+        width: 100%;
+        height: 3%;
+    }
+
+    .menuConf {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .bloc1p1 {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .medidas {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .filas label,
+    .columnas label {
+        display: block;
+        font-size: 12px;
+    }
+
+    #filas,
+    #columnas {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+
+    .num-barcos label {
+        display: block;
+        font-size: 11px;
+    }
+
+    #numBarcos {
+        width: 100%;
+        height: 4px;
+        margin-top: 0%;
+    }
+
+    .dificultad {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .dificultad label {
+        font-size: 12px;
+    }
+
+    .botones {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .botones label {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    #nombre {
+        width: 100%;
+        padding: 3px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    #datos {
+        margin-left: 0%;
+        margin-top: 0%;
+    }
+
+    #datos,
+    #reiniciar,
+    #abandonar {
+        width: 100%;
+        padding: 4px;
+        border-radius: 4px;
+        font-size: 10px;
+        cursor: pointer;
+        border: none;
+    }
+
+    #datos {
+        background: #636AE8;
+        color: white;
+    }
+
+    #reiniciar {
+        background: white;
+        border: 1px solid #ddd;
+        color: #333;
+    }
+
+    #abandonar {
+        background: #e02325;
+        color: white;
+    }
+
+    #textoDificultad {
+        padding: 5px;
+        border-radius: 4px;
+        font-size: 12px;
+        text-align: center;
+        margin: 5px 0;
+    }
+
+    #estadisticas {
+        height: auto;
+        margin-top: 0px;
+        padding: 15px;
+        width: 60%;
+        margin: auto;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+    #estadisticas h2,
+    #estadisticas h3 {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .info-general p {
+        font-size: 14px;
+        margin: 3px 0;
+    }
+
+    .tabla-top5 {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+        font-size: 12px;
+    }
+
+    .tabla-top5 th {
+        background: #0077ff;
+        color: white;
+        padding: 4px;
+        font-size: 12px;
+    }
+
+    .tabla-top5 td {
+        border: 1px solid black;
+        padding: 3px;
+        font-size: 11px;
+    }
+
+    #final {
+        font-size: 50px;
+        font-weight: bold;
+        margin-bottom: 0%;
+    }
+}
+
+@media screen and (max-width: 775px) {
+    #estadisticas {
+        height: auto;
+        margin-top: 0px;
+        padding: 15px;
+        width: 60%;
+        margin: auto;
+        border-radius: 12px;
+        text-align: center;
+    }
+
+    #estadisticas h2,
+    #estadisticas h3 {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .info-general p {
+        font-size: 14px;
+        margin: 3px 0;
+    }
+
+    .tabla-top5 {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 8px;
+        font-size: 12px;
+    }
+
+    .tabla-top5 th {
+        background: #0077ff;
+        color: white;
+        padding: 4px;
+        font-size: 12px;
+    }
+
+    .tabla-top5 td {
+        border: 1px solid black;
+        padding: 3px;
+        font-size: 11px;
+    }
+
+    #final {
+        font-size: 50px;
+        font-weight: bold;
+        margin-bottom: 0%;
+    }
+
+}
+
+@media screen and (max-width: 370px) {
+    #estadisticas {
+        height: auto;
+        margin-top: 0;
+        padding: 10px;
+        width: 90%;
+        margin: auto;
+        border-radius: 8px;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    #final {
+        font-size: 24px;
+    }
+
+    #estadisticas h2,
+    #estadisticas h3 {
+        margin-bottom: 5px;
+        color: #333;
+        font-size: 12px;
+    }
+
+    .info-general p {
+        font-size: 11px;
+        margin: 2px 0;
+        line-height: 1.2;
+    }
+
+    .tabla-top5 {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 5px;
+        font-size: 10px;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .tabla-top5 th {
+        background: #0077ff;
+        color: white;
+        padding: 2px 4px;
+        font-size: 10px;
+    }
+
+    .tabla-top5 td {
+        border: 1px solid #ccc;
+        padding: 2px 3px;
+        font-size: 9px;
     }
 }
