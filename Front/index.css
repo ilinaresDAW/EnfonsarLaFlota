@@ -401,6 +401,7 @@ table {
         color: #636AE8;
         font-weight: bold;
         font-size: 15px;
+        display: flex;
 
     }
 
@@ -435,11 +436,6 @@ table {
         margin-left: 2%;
         margin-right: 2%;
         margin-top: 4%;
-    }
-
-    .jugador {
-        display: flex;
-
     }
 
     .disparos {
@@ -532,6 +528,7 @@ table {
         font-size: 12px;
     }
 
+
     .botones {
         flex: 1;
         display: flex;
@@ -571,7 +568,76 @@ table {
         background: #636AE8;
         color: white;
     }
+#bloc3 {
+        display: flex;
+        width: 100%;
+        height: 25%;
+        padding: 0%;
+        margin: 0%;
+        margin-left: 1%;
+    }
 
+    .bloc3p1 {
+        display: flex;
+        width: 100%;
+    }
+
+    .estats2 {
+        margin-right: 5%;
+        margin-left: 6%;
+    }
+
+    .jugador {
+        color: #636AE8;
+        font-weight: bold;
+        font-size: 11px;
+        display: flex;
+
+    }
+
+    .puntos {
+        color: #636AE8;
+        font-weight: bold;
+        font-size: 15px;
+        margin-top: 0%;
+        display: flex;
+
+    }
+
+    .disparosAcertados,
+    .disparosFallados,
+    .barcosHundidos {
+        padding: 2px;
+        background-color: #f0f0f0;
+        border-radius: 20px;
+        font-size: 8px;
+        color: #555;
+        width: 60px;
+        height: 20%;
+        display: flex;
+    }
+
+    h2 {
+        font-size: 10px;
+    }
+
+    .marcador {
+        display: flex;
+        margin-left: 2%;
+        margin-right: 2%;
+        margin-top: 4%;
+    }
+
+    .disparos {
+        display: flex;
+
+    }
+
+    .jugadas {
+        margin-top: 5%;
+        margin-right: 0%;
+        width: 15%;
+    }
     #reiniciar {
         background: white;
         border: 1px solid #ddd;
@@ -590,9 +656,11 @@ table {
         text-align: center;
         margin: 5px 0;
     }
-    #ultimaJugada{
+
+    #ultimaJugada {
         display: none;
     }
+
     #estadisticas {
         height: auto;
         margin-top: 0px;
@@ -639,6 +707,8 @@ table {
         font-weight: bold;
         margin-bottom: 0%;
     }
+
+
 }
 
 @media screen and (max-width: 775px) {

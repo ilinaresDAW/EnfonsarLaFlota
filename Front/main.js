@@ -168,13 +168,13 @@ boton.addEventListener('click', function (event) {
 
     let dificultadTexto = ""
     if (Dfacil.checked) {
-        dificultadTexto = "Facil"
+        dificultadTexto = "Fácil"
         console.log(`dificultad establecida facil`)
     } else if (Dmedio.checked) {
         dificultadTexto = "Media"
         console.log(`dificultad establecida media`)
     } else if (Ddificil.checked) {
-        dificultadTexto = "Dificil"
+        dificultadTexto = "Difícil"
         console.log(`dificultad establecida dificil`)
     } else {
         alert(`ESTA MAL`)
