@@ -347,7 +347,7 @@ table {
     font-size: 15px;
 }
 
-
+/*VISTA TABLET*/
 @media screen and (max-width: 1024px) {
 
     .pagina {
@@ -400,7 +400,7 @@ table {
     .jugador {
         color: #636AE8;
         font-weight: bold;
-        font-size: 15px;
+        font-size: 12px;
         display: flex;
 
     }
@@ -408,7 +408,7 @@ table {
     .puntos {
         color: #636AE8;
         font-weight: bold;
-        font-size: 20px;
+        font-size: 16px;
         margin-top: 0%;
         display: flex;
 
@@ -417,18 +417,19 @@ table {
     .disparosAcertados,
     .disparosFallados,
     .barcosHundidos {
-        padding: 4px;
+        padding: 2px;
         background-color: #f0f0f0;
         border-radius: 20px;
-        font-size: 10px;
+        font-size: 8px;
         color: #555;
         width: 60px;
         height: 20%;
         display: flex;
+        align-items: center;
     }
 
     h2 {
-        font-size: 15px;
+        font-size: 11px;
     }
 
     .marcador {
@@ -461,6 +462,7 @@ table {
 
 
 }
+/*VISTA MOVIL*/
 
 @media screen and (max-width: 450px) {
     .pagina {
@@ -710,6 +712,7 @@ table {
 
 
 }
+/*REAJUSTE DE PANTALLA*/
 
 @media screen and (max-width: 775px) {
     #estadisticas {
@@ -760,7 +763,7 @@ table {
     }
 
 }
-
+/*REAJUSTE DE PANTALLA*/
 @media screen and (max-width: 370px) {
     #estadisticas {
         height: auto;

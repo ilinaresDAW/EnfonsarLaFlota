@@ -192,7 +192,6 @@ boton.addEventListener('click', function (event) {
     // Mostrar bloques 2 3
     document.getElementById('bloc2').style.display = 'block'
     document.getElementById('bloc3').style.display = 'block'
-    //document.getElementById('bloc23').style.display = 'block'
 
 
 
@@ -273,29 +272,31 @@ boton.addEventListener('click', function (event) {
 
                         // Total disparos
                         let totalDisparos = disparos + disparosFallados;
-                        document.getElementById(`totalDisparos`).textContent = totalDisparos;
+                        document.getElementById(`totalDisparos`).textContent = totalDisparos
                     })
                     .catch(error => {
-                        console.error("Error al enviar datos:", error);
+                        console.error("Error al enviar datos:", error)
                     })
 
-                console.log('Click en ' + fila + ' y ' + col);
+                console.log('Click en ' + fila + ' y ' + col)
             })
         }
     }
-});
-
+})
+//Configuracion de botones
+//Abandonar
 let botonAbandonar = document.getElementById('abandonar')
 botonAbandonar.addEventListener('click', function (event) {
     abandonarPartida()
     console.log(`Abandono`)
 })
+//Reiniciar
 let botonReiniciar = document.getElementById('reiniciar')
 botonReiniciar.addEventListener('click', function (event) {
     console.log(`Reinicio`)
     reiniciarPartida();
 })
-
+//Avisar de si quiere recargar la pgina
 window.onbeforeunload = function (event) {
-    return "¿Seguro que quieres salir de la partida?";
-};
+    return "¿Quieres reiniciar la partida para intentarlo de nuevo?"
+}
