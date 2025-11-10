@@ -177,7 +177,7 @@ boton.addEventListener('click', function (event) {
         dificultadTexto = "Difícil"
         console.log(`dificultad establecida dificil`)
     } else {
-        alert(`ESTA MAL`)
+        alert(`Selecciona dificultad`)
         return
     }
     document.getElementById(`textoDificultad`).textContent = dificultadTexto
@@ -255,7 +255,7 @@ boton.addEventListener('click', function (event) {
                             document.getElementById("bloc23").style.width = "63%"
                             mostrarEstats()
                             document.getElementById("bloc23").classList.add("finalizado")
-
+                            document.getElementById("imagenMario").style.display = "none"
                             console.log(`PERDEDOR`);
                         } else if (estado === 'Victoria') {
                             document.getElementById("bloc2").style.display = "none"

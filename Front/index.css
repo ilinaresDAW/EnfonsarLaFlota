@@ -174,8 +174,10 @@ header {
     background-color: red;
 }
 
-.iamgenMando {
+.mando {
     margin-top: 10%;
+    width: 80%;
+    height: 80%;
 }
 
 .bloc2 {
@@ -303,6 +305,21 @@ table {
     font-weight: bold;
     margin-bottom: 0%;
 }
+
+.imagenMario {
+    margin-top: 30%;
+    display: flex;
+    margin-left: 20%;
+
+}
+
+.mario {
+    width: 70%;
+    height: auto;
+    display: block;
+}
+
+
 
 #estadisticas {
     display: none;
@@ -460,8 +477,11 @@ table {
         display: none;
     }
 
-
+    .imagenMario{
+        display: none;
+    }
 }
+
 /*VISTA MOVIL*/
 
 @media screen and (max-width: 450px) {
@@ -486,6 +506,9 @@ table {
         flex: 1;
         display: flex;
         flex-direction: column;
+    }
+    .imagenMando{
+        display: none;
     }
 
     .medidas {
@@ -570,7 +593,8 @@ table {
         background: #636AE8;
         color: white;
     }
-#bloc3 {
+
+    #bloc3 {
         display: flex;
         width: 100%;
         height: 25%;
@@ -640,6 +664,7 @@ table {
         margin-right: 0%;
         width: 15%;
     }
+
     #reiniciar {
         background: white;
         border: 1px solid #ddd;
@@ -712,6 +737,7 @@ table {
 
 
 }
+
 /*REAJUSTE DE PANTALLA*/
 
 @media screen and (max-width: 775px) {
@@ -763,6 +789,7 @@ table {
     }
 
 }
+
 /*REAJUSTE DE PANTALLA*/
 @media screen and (max-width: 370px) {
     #estadisticas {
